@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: SpringRestMySQL
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: FABIEN
+Built-By: Olivier
 Implementation-Vendor-Id: com.javasampleapproach
-Build-Jdk: 1.8.0_151
+Build-Jdk: 1.8.0_191
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/spring-boot-rest-mysql
 Created-By: Maven Integration for Eclipse
