@@ -1,0 +1,6 @@
+<h3>Liste des températures de floor1</h3>
+
+<div *ngFor="let temperature of temperatures | async" style="width: 300px;">
+    <temperature-detail [temperature]='temperature'></temperature-detail>
+	
+</div>
