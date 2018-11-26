@@ -14,6 +14,8 @@ si erreur
 
 Spring : 
 
+1515
+
 File>import>Existing maven project>Link of your folder
 Puis finish 
 Dans ressources attion modifier le mot de passe de notre bdd
