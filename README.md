@@ -33,7 +33,7 @@ RabbitMQ is the most widely deployed open source message broker. It supports mul
 Default port is 1883;
 For this project we need to install RabbitMQ server by follow this link http://www.rabbitmq.com/download.html.
 After installing, go to folder C:\Users\User\AppData\Roaming\RabbitMQ and open file with name rabbitmq.config.
-Put this value without quotes `[{rabbit, [{loopback_users, []}]}].` and save the file.
+Put this value `[{rabbit, [{loopback_users, []}]}].` and save the file.
 After we need to do next command in command line:
             ```rabbitmq-plugins list```
 With this command, you can take plugins list supported by RabbitMQ server. we need to enable `rabbitmq_mqtt` with follow command
