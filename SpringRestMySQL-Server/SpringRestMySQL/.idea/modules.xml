@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.temperature.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.temperature.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.temperature.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.temperature.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.temperature.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.temperature.test.iml" />
+    </modules>
+  </component>
+</project>
