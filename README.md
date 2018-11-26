@@ -42,4 +42,7 @@ Next plugin will give oportunity to use convenient http user interface
             ```rabbitmq-plugins enable rabbitmq_management```
 For detailed sitting, you can use the web-interface `http://localhost:15672/`, login: `guest`, pass: `guest`, by default;
 
+IoT `Arduino MKR WiFi 1010`
+In this project we are using Arduino MKR WiFi 1010 with Sensor `Temperature and Humidity Sensor DHT22` for to get temperature value of room. 
+Code you can found in folder with name `\temperatureCPS2\IoT\Arduino\Arduino MKR WiFi 1010 .ino`;
 
