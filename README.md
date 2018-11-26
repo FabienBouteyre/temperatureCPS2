@@ -14,8 +14,6 @@ si erreur
 
 Spring : 
 
-1515
-
 File>import>Existing maven project>Link of your folder
 Puis finish 
 Dans ressources attion modifier le mot de passe de notre bdd
@@ -28,3 +26,20 @@ Donwload MySQL
 ```use tempBDD; ```
 ```create table data (id int unsigned not null auto_increment primary key, room varchar(255), value int);```
 ```insert into data (room, value) values ('J007', 24);```
+
+RabbitMQ:
+
+RabbitMQ is the most widely deployed open source message broker. It supports multiple messaging protocols. This message broker have supported a lot of protocols. We will use MQTT plugin for accepting and transferring data from devices (Arduino MKR WiFI 1010).
+Default port is 1883;
+For this project we need to install RabbitMQ server by follow this link http://www.rabbitmq.com/download.html.
+After installing, go to folder C:\Users\User\AppData\Roaming\RabbitMQ and open file with name rabbitmq.config.
+Put this value without quotes `[{rabbit, [{loopback_users, []}]}].` and save the file.
+After we need to do next command in command line:
+            ```rabbitmq-plugins list```
+With this command, you can take plugins list supported by RabbitMQ server. we need to enable `rabbitmq_mqtt` with follow command
+            ```rabbitmq-plugins enable rabbitmq_mqtt```
+Next plugin will give oportunity to use convenient http user interface
+            ```rabbitmq-plugins enable rabbitmq_management```
+For detailed sitting, you can use the web-interface `http://localhost:15672/`, login: `guest`, pass: `guest`, by default;
+
+
