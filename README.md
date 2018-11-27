@@ -32,7 +32,7 @@ RabbitMQ:
 RabbitMQ is the most widely deployed open source message broker. It supports multiple messaging protocols. This message broker have supported a lot of protocols. We will use MQTT plugin for accepting and transferring data from devices (Arduino MKR WiFI 1010).
 Default port is 1883;
 For this project we need to install RabbitMQ server by follow this link http://www.rabbitmq.com/download.html.
-After installing, go to folder C:\Users\User\AppData\Roaming\RabbitMQ and open file with name rabbitmq.config.
+After installing, go to folder C:\Users\User\AppData\Roaming\RabbitMQ and open file with name rabbitmq.config it is config file and first time it will be emty. 
 Put this value `[{rabbit, [{loopback_users, []}]}].` and save the file.
 After we need to do next command in command line:
             ```rabbitmq-plugins list```
