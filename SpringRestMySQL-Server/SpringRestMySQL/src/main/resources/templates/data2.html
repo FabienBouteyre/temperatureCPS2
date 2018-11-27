@@ -18,7 +18,7 @@
         <a class="btn btn-info" th:href="@{/}" role="button">Home</a>
         <a class="btn btn-info" th:href="@{/sensors/data}" role="button">List of sensors</a>
         <a class="btn btn-info" th:href="@{/sensors/data/current}" role="button">Current data of sensors</a>
-        <a class="btn btn-info" th:href="@{'/sensors/data/' + ${sensor.getId()}}" role="button">Update</a>
+        <a class="btn btn-info" th:href="@{'/sensors/data/' + ${sensor.getId()}}" role="button" id="update">Update</a>
     </div>
 
     <table class="table table-hover">
@@ -42,7 +42,14 @@
         </tbody>
     </table>
 </div>
-
+<script>
+    var update = document.getElementById("update");
+    var timeout = setTimeout(function(){
+        update.click();
+        timeout;
+        console.log('updated')
+    } , 5000);
+</script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/static/js/jquery-3.2.1.slim.min.js"></script>

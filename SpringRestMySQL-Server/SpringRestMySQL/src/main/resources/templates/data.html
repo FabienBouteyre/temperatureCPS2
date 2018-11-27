@@ -17,7 +17,7 @@
     <div class="mt-5">
         <a class="btn btn-info" th:href="@{/}" role="button">Home</a>
         <a class="btn btn-info" th:href="@{/sensors/data/current}" role="button">Current data of sensors</a>
-        <a class="btn btn-info" th:href="@{/sensors/data}" role="button">Update</a>
+        <a class="btn btn-info" th:href="@{/sensors/data}" role="button" id="update">Update</a>
 
     </div>
 
@@ -40,6 +40,14 @@
         </tbody>
     </table>
 </div>
+<script>
+    var update = document.getElementById("update");
+    var timeout = setTimeout(function(){
+        update.click();
+        timeout;
+        console.log('updated')
+    } , 5000);
+</script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
