@@ -32,8 +32,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="sensor : ${sensors}">
-            <td th:utext="${sensor.getId()}"></td>
+        <tr th:each="sensor, index : ${sensors}">
+            <!--<td th:utext="${sensor.getId()}"></td>-->
+            <td th:utext="${index.index}"></td>
             <td th:utext="${sensor.getRoom()}"></td>
             <td th:utext="${sensor.getDescrib()}"></td>
             <td th:utext="${sensor.getSensorDataEntity().getValue()}"></td>

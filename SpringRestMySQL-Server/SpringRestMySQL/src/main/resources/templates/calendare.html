@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+    <title>Calendare</title>
+</head>
+<body>
+
+<div class="container card-body border border-info rounded p-5">
+
+    <div class="mt-5">
+        <a class="btn btn-info" th:href="@{/sensors/data}" role="button">List of sensors</a>
+        <a class="btn btn-info" th:href="@{/sensors/data/current}" role="button">Current data of sensors</a>
+    </div>
+
+    <form method="post" th:action="@{/calendare}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name of lesson</label>
+            <input name="lesson" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Text">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Example file input</label>
+            <input type="text" >
+            <input name="file" type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div class="p-3 mb-2 bg-primary text-white" th:if="${mess}" th:utext="${mess}"></div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/static/js/jquery-3.2.1.slim.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

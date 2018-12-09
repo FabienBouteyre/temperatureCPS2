@@ -25,29 +25,19 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Room</th>
-            <th scope="col">Descrip</th>
+            <th scope="col">Lesson</th>
             <th scope="col">Href</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="sensor, index: ${sensors}">
+        <tr th:each="lesson, index: ${lessons}">
             <td th:utext="${index.index}"></td>
-            <td th:utext="${sensor.getRoom()}"></td>
-            <td th:utext="${sensor.getDescrib()}"></td>
-            <td><a th:href="@{'/sensors/data/' + ${sensor.getId()}}">To show</a></td>
+            <td th:utext="${lesson.getName()}"></td>
+            <td><a th:href="@{'/calendare/lessons/schedule/' + ${lesson.getId()}}">To show data</a></td>
         </tr>
         </tbody>
     </table>
 </div>
-<script>
-    var update = document.getElementById("update");
-    var timeout = setTimeout(function(){
-        update.click();
-        timeout;
-        console.log('updated')
-    } , 5000);
-</script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

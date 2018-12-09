@@ -25,29 +25,25 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Room</th>
-            <th scope="col">Descrip</th>
-            <th scope="col">Href</th>
+            <th scope="col">Description</th>
+            <th scope="col">Start</th>
+            <th scope="col">Stop</th>
+            <th scope="col">Location</th>
+            <th scope="col">Last modification</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="sensor, index: ${sensors}">
+        <tr th:each="data, index: ${lessondaties}">
             <td th:utext="${index.index}"></td>
-            <td th:utext="${sensor.getRoom()}"></td>
-            <td th:utext="${sensor.getDescrib()}"></td>
-            <td><a th:href="@{'/sensors/data/' + ${sensor.getId()}}">To show</a></td>
+            <td th:utext="${data.getDescrib()}"></td>
+            <td th:utext="${data.getStart()}"></td>
+            <td th:utext="${data.getStop()}"></td>
+            <td th:utext="${data.getLocation()}"></td>
+            <td th:utext="${data.getLastmodified()}"></td>
         </tr>
         </tbody>
     </table>
 </div>
-<script>
-    var update = document.getElementById("update");
-    var timeout = setTimeout(function(){
-        update.click();
-        timeout;
-        console.log('updated')
-    } , 5000);
-</script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

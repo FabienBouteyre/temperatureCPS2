@@ -36,7 +36,7 @@ public class ConfigWebSecurity extends WebSecurityConfigurerAdapter {
 //                .csrf().ignoringAntMatchers("/console/**")
 //                .and()
                 .authorizeRequests()
-                    .antMatchers( "/static/**", "/regist", "/sensors/**", "/api/**", "/", "/home").permitAll()
+                    .antMatchers( "/static/**", "/regist", "/sensors/**", "/api/**", "/", "/home", "/calendare/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin().loginPage("/login").permitAll().successForwardUrl("/home")
