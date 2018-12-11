@@ -18,25 +18,30 @@
         <a class="btn btn-info" th:href="@{/}" role="button">Home</a>
         <a class="btn btn-info" th:href="@{/sensors/data/current}" role="button">Current data of sensors</a>
         <a class="btn btn-info" th:href="@{/sensors/data}" role="button" id="update">Update</a>
-
     </div>
-
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Specialition</th>
-            <th scope="col">Href</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="spec, index: ${specialist}">
-            <td th:utext="${index.index}"></td>
-            <td th:utext="${spec.getName()}"></td>
-            <td><a th:href="@{'/calendare/lessons/' + ${spec.getId()}}">To show Lessons</a></td>
-        </tr>
-        </tbody>
-    </table>
+    <form th:action="@{/calendare/specialist}" method="post">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Specialition</th>
+                <th scope="col">Href</th>
+                <th scope="col">Del</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="spec, index: ${specialist}">
+                <td th:utext="${index.index}"></td>
+                <td th:utext="${spec.getName()}"></td>
+                <td><a th:href="@{'/calendare/lessons/' + ${spec.getId()}}">To show Lessons</a></td>
+                <td>
+                    <input type="hidden" name="id" th:value="${spec.getId()}">
+                    <button class="btn btn-info" type="submit">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 </div>
 
 <!-- Optional JavaScript -->

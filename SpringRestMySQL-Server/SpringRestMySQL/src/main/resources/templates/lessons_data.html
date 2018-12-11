@@ -18,31 +18,38 @@
         <a class="btn btn-info" th:href="@{/}" role="button">Home</a>
         <a class="btn btn-info" th:href="@{/sensors/data/current}" role="button">Current data of sensors</a>
         <a class="btn btn-info" th:href="@{/sensors/data}" role="button" id="update">Update</a>
-
     </div>
-
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Description</th>
-            <th scope="col">Start</th>
-            <th scope="col">Stop</th>
-            <th scope="col">Location</th>
-            <th scope="col">Last modification</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="data, index: ${lessondaties}">
-            <td th:utext="${index.index}"></td>
-            <td th:utext="${data.getDescrib()}"></td>
-            <td th:utext="${data.getStart()}"></td>
-            <td th:utext="${data.getStop()}"></td>
-            <td th:utext="${data.getLocation()}"></td>
-            <td th:utext="${data.getLastmodified()}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <form th:action="@{'/calendare/lessons/schedule/' + ${id}}" method="post">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Description</th>
+                <th scope="col">Start</th>
+                <th scope="col">Stop</th>
+                <th scope="col">Location</th>
+                <th scope="col">Last modification</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Id</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="data, index: ${lessondaties}">
+                <td th:utext="${index.index}"></td>
+                <td th:utext="${data.getDescrib()}"></td>
+                <td th:utext="${data.getStart()}"></td>
+                <td th:utext="${data.getStop()}"></td>
+                <td th:utext="${data.getLocation()}"></td>
+                <td th:utext="${data.getLastmodified()}"></td>
+                <td>
+                    <input type="hidden" name="id" th:value="${data.getId()}">
+                    <button class="btn btn-info" type="submit">Delete</button>
+                </td>
+                <td th:utext="${data.getId()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 </div>
 
 <!-- Optional JavaScript -->

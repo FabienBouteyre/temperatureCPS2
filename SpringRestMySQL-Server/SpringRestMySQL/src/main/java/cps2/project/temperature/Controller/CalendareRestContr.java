@@ -4,6 +4,7 @@ package cps2.project.temperature.Controller;
 import cps2.project.temperature.Entity.Calendars.Lesson;
 import cps2.project.temperature.Entity.Calendars.LessoneSchedulesData;
 import cps2.project.temperature.Entity.Calendars.Specialities;
+import cps2.project.temperature.Entity.Mess;
 import cps2.project.temperature.Repository.RepLesson;
 import cps2.project.temperature.Repository.RepLessonSpecialities;
 import cps2.project.temperature.Repository.RepLessoneSchedulesData;
@@ -28,12 +29,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-@Controller
-@RequestMapping(path = "/calendare")
-public class CalendareContr {
+@RestController
+@RequestMapping(path = "/api/calendare")
+public class CalendareRestContr {
 
     @Autowired
     private ServiceCalendaresConvert serviceCalendaresConvert;
@@ -48,55 +50,45 @@ public class CalendareContr {
     private RepLessonSpecialities repLessonSpecialities;
 
     @GetMapping("/specialist")
-    public String GetSpecialist(Model model){
-        model.addAttribute("specialist", repLessonSpecialities.findAll());
-        return "lesson_spec";
+    public List<Specialities> GetSpecialist(){
+       return repLessonSpecialities.findAll();
     }
 
     @PostMapping("/specialist")
-    public String PostSpecialist(@RequestParam("id") Specialities specialities, Model model){
+    public List<Specialities> PostSpecialist(@RequestParam("id") Specialities specialities, Model model){
         repLessonSpecialities.delete(specialities);
-        model.addAttribute("specialist", repLessonSpecialities.findAll());
-        return "lesson_spec";
+        return repLessonSpecialities.findAll();
     }
 
     @GetMapping("/lessons/{id}")
-    public String GetLessons(@PathVariable("id") Specialities specialities, Model model){
-        model.addAttribute("lessons", repLesson.findBySpecialities(specialities));
-        model.addAttribute("id", String.valueOf(specialities.getId()));
-        return "lessons";
+    public List<Lesson> GetLessons(@PathVariable("id") Specialities specialities){
+        return repLesson.findBySpecialities(specialities);
     }
 
     @PostMapping("/lessons/{id}")
-    public String PostLessons(@PathVariable("id") Specialities specialities, @RequestParam("id") Lesson lesson, Model model){
+    public List<Lesson> PostLessons(@PathVariable("id") Specialities specialities, @RequestParam("id") Lesson lesson){
         repLesson.delete(lesson);
-        model.addAttribute("lessons", repLesson.findBySpecialities(specialities));
-        model.addAttribute("id", String.valueOf(specialities.getId()));
-        return "lessons";
+        return repLesson.findBySpecialities(specialities);
     }
 
     @GetMapping("/lessons/schedule/{id}")
-    public String GetLessonsScheduleList(@PathVariable("id") Lesson lesson, Model model){
-        model.addAttribute("lessondaties", repLessoneSchedulesData.findByLesson(lesson));
-        model.addAttribute("id", lesson.getId());
-        return "lessons_data";
+    public List<LessoneSchedulesData> GetLessonsScheduleList(@PathVariable("id") Lesson lesson){
+        return repLessoneSchedulesData.findByLesson(lesson);
     }
 
     @PostMapping("/lessons/schedule/{id}")
-    public String GetLessonsScheduleList(@PathVariable("id") Lesson lesson, @RequestParam("id") LessoneSchedulesData lessoneSchedulesData, Model model){
+    public List<LessoneSchedulesData> GetLessonsScheduleList(@PathVariable("id") Lesson lesson, @RequestParam("id") LessoneSchedulesData lessoneSchedulesData){
         repLessoneSchedulesData.delete(lessoneSchedulesData);
-        model.addAttribute("lessondaties", repLessoneSchedulesData.findByLesson(lesson));
-        model.addAttribute("id", lesson.getId());
-        return "lessons_data";
+        return repLessoneSchedulesData.findByLesson(lesson);
     }
 
     @GetMapping
-    public String GetCalendare(Model model) {
-        return "calendare";
+    public Mess GetCalendare(){
+        return new Mess("This map support post for download calendare data with formate *.ics");
     }
 
     @PostMapping
-    public String PostCalendare(@RequestParam(name = "lesson") String les, @RequestParam(name = "file") MultipartFile mlfile, Model model) throws IOException, ParserException, ParseException {
+    public Mess PostCalendare(@RequestParam(name = "lesson") String les, @RequestParam(name = "file") MultipartFile mlfile, Model model) throws IOException, ParserException, ParseException {
 
         if (!StringUtils.isEmpty(les)) {
             if (mlfile != null && !mlfile.getOriginalFilename().isEmpty()) {
@@ -151,15 +143,12 @@ public class CalendareContr {
 
                 }
 
-                model.addAttribute("mess", "");
+                return new Mess("Data successfuly saved");
             } else {
-                model.addAttribute("mess", "File is emty or emty");
+                return new Mess("File is emty or emty");
             }
         } else {
-            model.addAttribute("mess", "Name of lesson is emty");
+            return new Mess("Name of lesson is emty");
         }
-        return "calendare";
     }
-
-
 }
