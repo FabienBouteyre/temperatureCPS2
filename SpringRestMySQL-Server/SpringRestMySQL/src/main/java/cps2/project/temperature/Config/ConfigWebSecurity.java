@@ -39,9 +39,9 @@ public class ConfigWebSecurity extends WebSecurityConfigurerAdapter {
                     .antMatchers( "/static/**", "/regist", "/sensors/**", "/api/**", "/", "/home", "/calendare/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
-                    .formLogin().loginPage("/login").permitAll().successForwardUrl("/home")
+                    .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home", true)
                 .and()
-                    .logout().permitAll();
+                    .logout().logoutUrl("/logout").permitAll().logoutSuccessUrl("/login");
     }
 
     @Override

@@ -1,0 +1,13 @@
+<div class="p-5 my-5 border" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <a class="m-1 btn btn-info" th:href="@{/}" role="button">Home</a>
+    <a class="m-1 btn btn-info" th:href="@{/sensors/data/current}" role="button">Current data of sensors</a>
+    <a class="m-1 btn btn-info" th:href="@{/sensors/data}" role="button">Data</a>
+    <a class="m-1 btn btn-info" th:href="@{/sensors/data}" role="button">Update</a>
+    <a class="m-1 btn btn-info" th:href="@{/calendare/specialist}" role="button">Specialist</a>
+    <form action="/logout" method="post">
+        <button type="submit"  class="m-1 btn btn-info">Logout</button>
+        <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}">
+    </form>
+
+</div>
