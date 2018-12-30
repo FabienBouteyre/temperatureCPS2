@@ -9,6 +9,7 @@ import { Floor2Component } from './floor2/floor2.component';
 import { TemperatureDetailComponent } from './temperature-detail/temperature-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PlanComponent } from './plan/plan.component';
+import { PlanModule } from 'ng-plan';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PlanComponent } from './plan/plan.component';
     DxVectorMapModule,
     HttpClientModule,
     AppRoutingModule,
+    PlanModule
 
   ],
   providers: [],

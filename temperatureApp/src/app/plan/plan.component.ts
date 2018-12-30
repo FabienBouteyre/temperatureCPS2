@@ -1,19 +1,3 @@
-/*import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'app-plan',
-  templateUrl: './plan.component.html',
-  styleUrls: ['./plan.component.css']
-})
-export class PlanComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}*/
-
 import { NgModule, Component, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
