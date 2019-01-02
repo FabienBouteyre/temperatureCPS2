@@ -27,9 +27,7 @@ public class WeatherController {
     public String PostWeather(@RequestParam("city") String city, Model model){
         if (!StringUtils.isEmpty(city)) {
             WeatherObject weather = serviceOpenWeatherMap.GetWeather(city);
-            model.addAttribute("mess", weather.getName());
-        }else {
-            model.addAttribute("mess", "city fiel is empty");
+            model.addAttribute("mess", weather);
         }
         return "weather";
     }

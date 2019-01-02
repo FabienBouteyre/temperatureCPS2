@@ -26,7 +26,18 @@
         </form>
     </div>
 
-    <div class="p-3 mb-2 bg-primary text-white" th:if="${mess}" th:utext="${mess}"></div>
+    <div class="p-3 mb-2 bg-primary text-white" th:if="${mess}" >
+        <h5 th:utext="${mess.getName()}"></h5><br>
+        <h5 th:utext="${mess.getVisibility()}"></h5><br>
+        <h5 th:utext="${mess.getVisibility()}"></h5><br>
+        <h5 th:utext="${mess.getWeathers()[0].getDescription()}"></h5><br>
+        <h5 th:utext="${mess.getWeathers()[0].getMain()}"></h5><br>
+        <h5 th:utext="${mess.getBase()}"></h5><br>
+        <h5 th:utext="${mess.getCoord().getLat()}"></h5><br>
+        <h5 th:utext="${mess.getCoord().getLon()}"></h5><br>
+        <h5 th:utext="${mess.getMain().getTemp()}"></h5><br>
+        <h5 th:utext="${mess.getMain().getHumidity()}"></h5><br>
+    </div>
 </div>
 
 <!-- Optional JavaScript -->
