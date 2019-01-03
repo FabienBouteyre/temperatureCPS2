@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class TemperatureService {
 
   private baseUrl = 'http://localhost:8080/api/temperature';
@@ -34,7 +36,6 @@ export class Feature {
 
 export class FeatureProperty {
     name: string;
-    square?: number;
 }
 
 export class FeatureGeometry {
@@ -50,115 +51,460 @@ let buildingData: FeatureCollection = {
             geometry: {
                 type: "Polygon",
                 coordinates: [[
-                    [10, -80],
-                    [-80, -80],
-                    [-80, 80],
-                    [40, 80],
-                    [40, -20],
-                    [100, -20],
-                    [100, -80],
-                    [30, -80],
-                    [30, -74],
-                    [34, -74],
-                    [34, -68],
-                    [40, -68],
-                    [40, -74],
-                    [94, -74],
-                    [94, -26],
-                    [40, -26],
-                    [40, -60],
-                    [34, -60],
-                    [34, 74],
-                    [-74, 74],
-                    [-74, 30],
-                    [10, 30],
-                    [10, 24],
-                    [-74, 24],
-                    [-74, -24],
-                    [10, -24],
-                    [10, -30],
-                    [-74, -30],
-                    [-74, -74],
-                    [10, -74]
+                    [-56,70],
+                    [-56,20],
+                    [-25,20],
+                    [-25,15],
+                    [-61,15],
+                    [-61,70],
+                    [-175,70],
+                    [-175,-70],
+                    [-61,-70],
+                    [-61,-4],
+                    [-56,-4],
+                    [-56,-70],
+                    [21,-70],
+                    [21,-4],
+                    [26,-4],
+                    [26,-70],
+                    [175,-70],
+                    [175,70],
+                    [26,70],
+                    [26,15],
+                    [-12,15],
+                    [-12,20],
+                    [21,20],
+                    [21,70],
+                    [-56,70],
+                    [-56,75],
+                    [180,75],
+                    [180,-75],
+                    [-180,-75],
+                    [-180,75],
+                    [-56,75]
                 ]]
             }
         }
     ]
 };
 
-let roomsData: FeatureCollection = {
+let roomsDataFloor2: FeatureCollection = {
     type: "FeatureCollection",
     features: [
         {
             type: "Feature",
             properties: {
-                name: "Room 1",
-                square: 576
+                name: "Room 201"
             },
             geometry: {
                 type: "Polygon",
                 coordinates: [[
-                    [-74, -30],
-                    [34, -30],
-                    [34, -74],
-                    [-74, -74]
+                    [-175, 70],
+                    [-130, 70],
+                    [-130, 15],
+                    [-175,15]
                 ]]
             }
         }, {
             type: "Feature",
             properties: {
-                name: "Room 2",
-                square: 600
+                name: "Room 202"
             },
             geometry: {
                 type: "Polygon",
                 coordinates: [[
-                    [-74, 24],
-                    [34, 24],
-                    [34, -24],
-                    [-74, -24]
+                    [-130, 70],
+                    [-102, 70],
+                    [-102, 15],
+                    [-130, 15]
                 ]]
             }
         }, {
             type: "Feature",
             properties: {
-                name: "Room 3",
-                square: 540
+                name: "Room 203"
             },
             geometry: {
                 type: "Polygon",
                 coordinates: [[
-                    [-74, 74],
-                    [34, 74],
-                    [34, 30],
-                    [-74, 30]
+                    [-102, 70],
+                    [-61, 70],
+                    [-61, 15],
+                    [-102, 15]
                 ]]
             }
         }, {
             type: "Feature",
             properties: {
-                name: "Room 4",
-                square: 288
+                name: "Room 204"
             },
             geometry: {
                 type: "Polygon",
                 coordinates: [[
-                    [40, -26],
-                    [94, -26],
-                    [94, -74],
-                    [40, -74]
+                    [-99, -4],
+                    [-61, -4],
+                    [-61, -70],
+                    [-99, -70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 205"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-99, -4],
+                    [-138, -4],
+                    [-138, -70],
+                    [-99, -70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "206"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-175, -40],
+                    [-138,-40],
+                    [-138,-70],
+                    [-175,-70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "WC"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-175, -40],
+                    [-149,-40],
+                    [-149,-20],
+                    [-175,-20]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "WC"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-175, -4],
+                    [-149,-4],
+                    [-149,-20],
+                    [-175,-20]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "WC"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-175, -4],
+                    [-149,-4],
+                    [-149,15],
+                    [-175,15]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 207"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-56, -23],
+                    [21,-23],
+                    [21,-70],
+                    [-56, -70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 208"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [26,-4],
+                    [62,-4],
+                    [62,-70],
+                    [26,-70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 209"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [62,-4],
+                    [101,-4],
+                    [101,-70],
+                    [62,-70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 210"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [101,-4],
+                    [140,-4],
+                    [140,-70],
+                    [101,-70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 211"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [140,-4],
+                    [175,-4],
+                    [175,-70],
+                    [140,-70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "WC"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [152,13],
+                    [175,13],
+                    [175,-4],
+                    [152,-4]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "WC"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [175,37],
+                    [152,37],
+                    [152,13],
+                    [175,13]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 212"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [26,70],
+                    [83,70],
+                    [83,15],
+                    [26,15]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 213"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [83,70],
+                    [144,70],
+                    [144,15],
+                    [83,15]
+                ]]
+            }
+        }
+
+    ]
+};
+
+let roomsDataFloor1: FeatureCollection = {
+    type: "FeatureCollection",
+    features: [
+        {
+            type: "Feature",
+            properties: {
+                name: "Room 101"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-175, 70],
+                    [-115, 70],
+                    [-115, 15],
+                    [-175,15]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 102"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-115, 70],
+                    [-61, 70],
+                    [-61, 15],
+                    [-115, 15]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 103"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-175, -4],
+                    [-61,-4],
+                    [-61,-70],
+                    [-175,-70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "WC"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [-175,15],
+                    [-142,15],
+                    [-142,-4],
+                    [-175, -4]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 104"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [26,-4],
+                    [99,-4],
+                    [99,-70],
+                    [26,-70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 105"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [99,-4],
+                    [175,-4],
+                    [175,-70],
+                    [99,-70]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 106"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [26,70],
+                    [83,70],
+                    [83,15],
+                    [26,15]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "Room 107"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [83,70],
+                    [143,70],
+                    [143,15],
+                    [83,15]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "WC"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [150,15],
+                    [175,15],
+                    [175,-4],
+                    [150,-4]
+                ]]
+            }
+        }, {
+            type: "Feature",
+            properties: {
+                name: "WC"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [[
+                    [150,40],
+                    [175,40],
+                    [175,15],
+                    [150,15]
                 ]]
             }
         }
     ]
-};
+}
+
 
 @Injectable()
 export class Service {
     getBuildingData(): FeatureCollection {
         return buildingData;
     }
-    getRoomsData(): FeatureCollection {
-        return roomsData;
+    getRoomsDataFloor2(): FeatureCollection {
+        return roomsDataFloor2;
+    }
+    getRoomsDataFloor1(): FeatureCollection {
+        return roomsDataFloor1;
     }
 }

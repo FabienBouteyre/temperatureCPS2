@@ -1,6 +1,17 @@
-<h3>Liste des températures de floor1</h3>
-
-<div *ngFor="let temperature of temperaturesss | async" style="width: 300px;">
-    <temperature-detail [temperature]='temperature'></temperature-detail>
-	
-</div>
+<dx-vector-map 
+    id="vector-map" 
+    [projection]="projection"> 
+    <dxo-tooltip 
+        [enabled]="true" 
+        [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+    <dxi-layer 
+        [hoverEnabled]="false" 
+        [dataSource]="buildingData" 
+        name="building"></dxi-layer>
+    <dxi-layer 
+        color="#B22222" 
+        [dataSource]="roomsData" 
+        name="rooms">
+        <dxo-label [enabled]="true" dataField="name" font="size=8"></dxo-label>
+    </dxi-layer>    
+</dx-vector-map>

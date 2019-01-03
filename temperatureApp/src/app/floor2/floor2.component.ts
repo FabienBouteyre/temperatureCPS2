@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Service } from '../temperature.service';
-import {
-  BBox,
-  Feature, FeatureCollection, GeometryCollection, LineString,
-  MultiLineString, MultiPoint, MultiPolygon, Point, Polygon, GeometryObject
-} from "geojson";
-declare var require: any;
+import { Component, enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { DxVectorMapModule } from 'devextreme-angular';
+import { projection } from 'devextreme/viz/vector_map/projection';
+
+import { FeatureCollection, Service } from '../temperature.service';
 
 @Component({
   selector: 'app-floor2',
@@ -13,21 +11,23 @@ declare var require: any;
   templateUrl: './floor2.component.html',
   styleUrls: ['./floor2.component.css']
 })
-export class Floor2Component implements OnInit {
+export class Floor2Component {
   
-
-
-  constructor() { 
-
-  var parse = require('wellknown');
- 
-  var geojsonpoly = parse('POLYGON((101.23 171.82, 201.32 101.5, 215.7 201.953, 101.23 171.82))');
-
-  console.log(geojsonpoly);
-  }
-
-  ngOnInit() {
-  }
+  projection: any;
+  roomsData: FeatureCollection;
+  buildingData: FeatureCollection;
   
+  constructor(service: Service) {
+      this.roomsData = service.getRoomsDataFloor2();
+      this.buildingData = service.getBuildingData();
+      this.projection = projection({
+          to: function (coordinates) {
+              return [coordinates[0] / 100, coordinates[1] / 100];
+          },
 
+          from: function (coordinates) {
+              return [coordinates[0] * 100, coordinates[1] * 100];
+          }
+      });
+  }
 }

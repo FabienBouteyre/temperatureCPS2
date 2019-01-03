@@ -8,23 +8,19 @@ import { Floor1Component } from './floor1/floor1.component';
 import { Floor2Component } from './floor2/floor2.component';
 import { TemperatureDetailComponent } from './temperature-detail/temperature-detail.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PlanComponent } from './plan/plan.component';
-import { PlanModule } from 'ng-plan';
 
 @NgModule({
   declarations: [
     AppComponent,
     Floor1Component,
     Floor2Component,
-    TemperatureDetailComponent,
-    PlanComponent
+    TemperatureDetailComponent
   ],
   imports: [
     BrowserModule,
     DxVectorMapModule,
     HttpClientModule,
-    AppRoutingModule,
-    PlanModule
+    AppRoutingModule
 
   ],
   providers: [],
