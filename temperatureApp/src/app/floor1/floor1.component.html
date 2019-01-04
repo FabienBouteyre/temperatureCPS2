@@ -3,15 +3,26 @@
     [projection]="projection"> 
     <dxo-tooltip 
         [enabled]="true" 
-        [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+        [customizeTooltip]="customizeTooltip">
+    </dxo-tooltip>
     <dxi-layer 
         [hoverEnabled]="false" 
-        [dataSource]="buildingData" 
-        name="building"></dxi-layer>
+        [dataSource]= "buildingData" 
+        name="building">
+    </dxi-layer>
     <dxi-layer 
         color="#B22222" 
-        [dataSource]="roomsData" 
+        [dataSource]= "roomsData" 
         name="rooms">
-        <dxo-label [enabled]="true" dataField="name" font="size=8"></dxo-label>
+        <dxo-label [enabled]="true" dataField="name" font="size: 8"></dxo-label>
     </dxi-layer>    
 </dx-vector-map>
+
+
+<!-- <dx-button text="Refresh All Data" (onClick)="refreshAllGrids()"></dx-button> -->
+
+
+<div *ngFor="let temperature of listeTemperatures | async" style="width: 300px;">
+    <temperature-detail [temperature]='temperature'></temperature-detail>
+	
+</div>

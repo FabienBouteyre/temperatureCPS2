@@ -3,25 +3,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
-@Injectable({
-  providedIn: 'root'
-})
-
-
-export class TemperatureService {
-
-  private baseUrl = 'http://localhost:8080/api/temperature';
-
-  constructor(private http: HttpClient) { }
-
-  getTemperatureList(): Observable<any> {
-	return this.http.get(`${this.baseUrl}`);
-  }
-}
-
-
-
 //For plan 
 export class FeatureCollection {
     type: string;
@@ -348,13 +329,15 @@ let roomsDataFloor2: FeatureCollection = {
     ]
 };
 
+var Room101="31";
+var Room102,Room103;
 let roomsDataFloor1: FeatureCollection = {
     type: "FeatureCollection",
     features: [
         {
             type: "Feature",
             properties: {
-                name: "Room 101"
+                name: Room101
             },
             geometry: {
                 type: "Polygon",
@@ -368,7 +351,7 @@ let roomsDataFloor1: FeatureCollection = {
         }, {
             type: "Feature",
             properties: {
-                name: "Room 102"
+                name: Room102
             },
             geometry: {
                 type: "Polygon",
@@ -496,8 +479,10 @@ let roomsDataFloor1: FeatureCollection = {
 }
 
 
-@Injectable()
-export class Service {
+@Injectable({
+    providedIn: 'root'
+  })
+export class TemperatureService {
     getBuildingData(): FeatureCollection {
         return buildingData;
     }
@@ -506,5 +491,18 @@ export class Service {
     }
     getRoomsDataFloor1(): FeatureCollection {
         return roomsDataFloor1;
+    }
+
+    setValueRoom101(value: string) {
+        Room101=value;
+        console.log(Room101);
+    }
+
+    private baseUrl = 'http://localhost:8080/api/sensors/data/current';
+
+    constructor(private http: HttpClient) { }
+
+    getTemperature(): Observable<any> {
+	    return this.http.get(`${this.baseUrl}`);
     }
 }

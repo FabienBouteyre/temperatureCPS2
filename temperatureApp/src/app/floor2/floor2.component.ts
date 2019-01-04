@@ -3,11 +3,11 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DxVectorMapModule } from 'devextreme-angular';
 import { projection } from 'devextreme/viz/vector_map/projection';
 
-import { FeatureCollection, Service } from '../temperature.service';
+import { FeatureCollection, TemperatureService } from '../temperature.service';
 
 @Component({
   selector: 'app-floor2',
-  providers: [ Service ],
+  providers: [ TemperatureService ],
   templateUrl: './floor2.component.html',
   styleUrls: ['./floor2.component.css']
 })
@@ -17,7 +17,7 @@ export class Floor2Component {
   roomsData: FeatureCollection;
   buildingData: FeatureCollection;
   
-  constructor(service: Service) {
+  constructor(service: TemperatureService) {
       this.roomsData = service.getRoomsDataFloor2();
       this.buildingData = service.getBuildingData();
       this.projection = projection({

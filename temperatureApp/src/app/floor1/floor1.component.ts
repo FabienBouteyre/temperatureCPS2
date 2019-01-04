@@ -1,27 +1,28 @@
-import { Component, enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { DxVectorMapModule } from 'devextreme-angular';
+import { Component,  ViewChildren, QueryList  } from '@angular/core';
 import { projection } from 'devextreme/viz/vector_map/projection';
+import { Observable } from 'rxjs';
+import { Temperature } from '../temperature';
 
-import { FeatureCollection, Service } from '../temperature.service';
+import { FeatureCollection, TemperatureService } from '../temperature.service';
 
 
 
 @Component({
   selector: 'app-floor1',
-  providers: [ Service ],
+  providers: [ TemperatureService ],
   templateUrl: './floor1.component.html',
   styleUrls: ['./floor1.component.css']
 })
 export class Floor1Component {
 
-  projection: any;
-  roomsData: FeatureCollection;
-  buildingData: FeatureCollection;
+  private projection: any;
+  private roomsData: FeatureCollection;
+  private buildingData: FeatureCollection;
+  private listeTemperatures: Observable<Temperature[]>;
   
-  constructor(service: Service) {
-      this.roomsData = service.getRoomsDataFloor1();
-      this.buildingData = service.getBuildingData();
+  constructor(private temperatureService: TemperatureService) {
+      this.roomsData = temperatureService.getRoomsDataFloor1();
+      this.buildingData = temperatureService.getBuildingData();
       this.projection = projection({
           to: function (coordinates) {
               return [coordinates[0] / 100, coordinates[1] / 100];
@@ -31,5 +32,14 @@ export class Floor1Component {
               return [coordinates[0] * 100, coordinates[1] * 100];
           }
       });
+      this.listeTemperatures = this.temperatureService.getTemperature();
+      //this.roomsData = temperatureService.getRoomsDataFloor1();
   }
+//   @ViewChildren(DxiLayerComponent) dataGrids: QueryList<DxiLayerComponent>
+
+//   refreshAllGrids() {
+//     this.dataGrids.forEach(function(dataGrid) {
+//         dataGrid.instance.refresh();  
+//     })
+// }
 }

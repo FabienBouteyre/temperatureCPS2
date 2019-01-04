@@ -1,8 +1,11 @@
 <div *ngIf="temperature">
   <div>
-    <label>Room: </label> {{temperature.room}}
+    <label>describ: </label> {{temperature.describ}}
   </div>
   <div>
-    <label>Value: </label> {{temperature.value}}
+    <label>sensorDataEntity: </label> {{temperature.sensorDataEntity.temp}}
+  </div>
+  <div>
+    <label>room: </label> {{temperature.room}}
   </div>
 </div>
