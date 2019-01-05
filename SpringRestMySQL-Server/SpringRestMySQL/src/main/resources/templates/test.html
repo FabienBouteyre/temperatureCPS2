@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    <script>
+        var a = 10;
+        var b = 20;
+        var c = 30;
+        var i = 40;
+
+        function bar(x, y, z){
+            return '' + x + y + z;
+        }
+        // console.log('ver 1  ' + bar());
+        // console.log('ver 2  ' + bar(a, b));
+        // console.log('ver 3  ' + bar(null, null, null));
+        // console.log('ver 4  ' + bar(a, b, c, undefined));
+        // console.log('ver 5  ' + bar(a, b, c, i, a, b, c, "ergregrege"));
+
+        console.log([1, 3, 2, 5, 7, 3].reduce(function(a, b){return a > b ? a : b}))
+
+    </script>
+
+</body>
+</html>
