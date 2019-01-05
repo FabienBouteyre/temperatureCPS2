@@ -18,11 +18,23 @@
     </dxi-layer>    
 </dx-vector-map>
 
-
-<!-- <dx-button text="Refresh All Data" (onClick)="refreshAllGrids()"></dx-button> -->
-
-
-<div *ngFor="let temperature of listeTemperatures | async" style="width: 300px;">
-    <temperature-detail [temperature]='temperature'></temperature-detail>
-	
-</div>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Room</th>
+        <th scope="col">Description</th>
+        <th scope="col">Temperature</th>
+        <th scope="col">Humidity</th>
+        <th scope="col">Light</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let temperature of listeTemperatures | async">
+        <td>{{temperature.room}}</td>
+        <td>{{temperature.describ}}</td>
+        <td>{{temperature.sensorDataEntity.temp}}</td>
+        <td>{{temperature.sensorDataEntity.hmdt}}</td>
+        <td>{{temperature.sensorDataEntity.light}}</td>
+    </tr>
+    </tbody>
+</table>

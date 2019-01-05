@@ -9,4 +9,6 @@ export class SensorDataEntity {
     id: number;
     date: Date;
     temp: string;
+    light: string;
+    hmdt: string;
 }

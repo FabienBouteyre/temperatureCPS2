@@ -2,9 +2,7 @@ import { Component,  ViewChildren, QueryList  } from '@angular/core';
 import { projection } from 'devextreme/viz/vector_map/projection';
 import { Observable } from 'rxjs';
 import { Temperature } from '../temperature';
-
 import { FeatureCollection, TemperatureService } from '../temperature.service';
-
 
 
 @Component({
@@ -32,14 +30,10 @@ export class Floor1Component {
               return [coordinates[0] * 100, coordinates[1] * 100];
           }
       });
-      this.listeTemperatures = this.temperatureService.getTemperature();
-      //this.roomsData = temperatureService.getRoomsDataFloor1();
+      this.getValueTemperature();
   }
-//   @ViewChildren(DxiLayerComponent) dataGrids: QueryList<DxiLayerComponent>
 
-//   refreshAllGrids() {
-//     this.dataGrids.forEach(function(dataGrid) {
-//         dataGrid.instance.refresh();  
-//     })
-// }
+  getValueTemperature(){
+    this.listeTemperatures = this.temperatureService.getTemperature();      
+  }
 }

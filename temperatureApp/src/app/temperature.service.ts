@@ -329,15 +329,13 @@ let roomsDataFloor2: FeatureCollection = {
     ]
 };
 
-var Room101="31";
-var Room102,Room103;
 let roomsDataFloor1: FeatureCollection = {
     type: "FeatureCollection",
     features: [
         {
             type: "Feature",
             properties: {
-                name: Room101
+                name: "Room 101"
             },
             geometry: {
                 type: "Polygon",
@@ -351,7 +349,7 @@ let roomsDataFloor1: FeatureCollection = {
         }, {
             type: "Feature",
             properties: {
-                name: Room102
+                name: "Room 102"
             },
             geometry: {
                 type: "Polygon",
@@ -493,16 +491,16 @@ export class TemperatureService {
         return roomsDataFloor1;
     }
 
-    setValueRoom101(value: string) {
-        Room101=value;
-        console.log(Room101);
-    }
+    // setValueRoom101(value: string) {
+    //     Room101=value;
+    //     console.log(Room101);
+    // }
 
-    private baseUrl = 'http://localhost:8080/api/sensors/data/current';
+    private baseUrl = 'http://localhost:8080/api';
 
     constructor(private http: HttpClient) { }
 
     getTemperature(): Observable<any> {
-	    return this.http.get(`${this.baseUrl}`);
+	    return this.http.get(`${this.baseUrl}`+`/sensors/data/current`);
     }
 }
