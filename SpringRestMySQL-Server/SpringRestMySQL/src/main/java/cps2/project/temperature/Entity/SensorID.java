@@ -17,12 +17,15 @@ public class SensorID {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonProperty("room")
     @Column(name = "room")
     private String room;
 
     @Column(name = "describ")
     private String describ;
+
+    @JsonProperty("address")
+    @Column(name = "address")
+    private String address;
 
     @Transient
     private SensorData sensorDataEntity;
@@ -80,5 +83,17 @@ public class SensorID {
 
     public void setSensorDataEntity(SensorData sensorDataEntity) {
         this.sensorDataEntity = sensorDataEntity;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<SensorData> getSensorData() {
+        return sensorData;
     }
 }

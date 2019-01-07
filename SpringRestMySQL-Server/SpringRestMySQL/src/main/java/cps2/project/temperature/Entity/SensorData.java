@@ -31,6 +31,10 @@ public class SensorData {
     @Column(name = "date")
     private Date date;
 
+    @Transient
+    @JsonProperty("button")
+    boolean button;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sensor_id")
 //    @OnDelete(action = OnDeleteAction.CASCADE)
@@ -76,6 +80,14 @@ public class SensorData {
 
     public void setHmdt(String hmdt) {
         this.hmdt = hmdt;
+    }
+
+    public boolean isButton() {
+        return button;
+    }
+
+    public void setButton(boolean button) {
+        this.button = button;
     }
 
     public Date getDate() {

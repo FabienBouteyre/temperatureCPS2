@@ -4,6 +4,7 @@ package cps2.project.temperature.Controller;
 import cps2.project.temperature.Entity.SensorID;
 import cps2.project.temperature.Repository.RepSensorData;
 import cps2.project.temperature.Repository.RepSensorID;
+import cps2.project.temperature.Service.Rabbitmq.Subscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,13 @@ public class SensorContr {
         }
         model.addAttribute("sensors", sensorIDS);
         return "currentdata";
+    }
+
+    @GetMapping("/data/manage")
+    public String GetManageData(Model model){
+
+        model.addAttribute("sensors", Subscriber.sensorIDs);
+        return "sensormanage";
     }
 
 
