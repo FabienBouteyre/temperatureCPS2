@@ -3,6 +3,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+interface Temperature {
+    id: number,
+    describ: string,
+    sensorDataEntity: SensorDataEntity,
+    room: string
+}
+interface SensorDataEntity {
+    id: number,
+    date: Date,
+    temp: string,
+    light: string,
+    hmdt: string
+}
+
 //For plan 
 export class FeatureCollection {
     type: string;
@@ -500,7 +514,7 @@ export class TemperatureService {
 
     constructor(private http: HttpClient) { }
 
-    getTemperature(): Observable<any> {
-	    return this.http.get(`${this.baseUrl}`+`/sensors/data/current`);
+    getTemperature() {
+	    return this.http.get<Temperature[]>(`${this.baseUrl}`+`/sensors/data/current`);
     }
 }
