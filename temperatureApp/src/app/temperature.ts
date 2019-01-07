@@ -1,5 +1,14 @@
 export class Temperature {
     id: number;
+    describ: string;
+    sensorDataEntity: SensorDataEntity;
     room: string;
-    value: number;
+}
+
+export class SensorDataEntity {
+    id: number;
+    date: Date;
+    temp: string;
+    light: string;
+    hmdt: string;
 }

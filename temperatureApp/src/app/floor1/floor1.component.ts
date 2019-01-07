@@ -1,30 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
+import { projection } from 'devextreme/viz/vector_map/projection';
 import { Observable } from 'rxjs';
-
-import { TemperatureService } from '../temperature.service';
 import { Temperature } from '../temperature';
-import { TemperatureDetailComponent } from '../temperature-detail/temperature-detail.component';
-
-
+import { FeatureCollection, TemperatureService } from '../temperature.service';
 
 @Component({
   selector: 'app-floor1',
+  providers: [ TemperatureService ],
   templateUrl: './floor1.component.html',
   styleUrls: ['./floor1.component.css']
 })
 export class Floor1Component implements OnInit {
 
-  temperatures: Observable<Temperature[]>;
-
-  constructor(private temperatureService: TemperatureService) { }
-
+  private projection: any;
+  private roomsData: FeatureCollection;
+  private buildingData: FeatureCollection;
+  private listeTemperatures: Temperature[];
+  
+  constructor(private temperatureService: TemperatureService) {}  
+  
   ngOnInit() {
-  	this.reloadData();
+    this.roomsData = this.temperatureService.getRoomsDataFloor1();
+    this.buildingData = this.temperatureService.getBuildingData();
+    this.projection = projection({
+      to: function (coordinates) {
+        return [coordinates[0] / 100, coordinates[1] / 100];
+      }, from: function (coordinates) {
+              return [coordinates[0] * 100, coordinates[1] * 100];
+          }
+    });
+    // this.temperatureService.getTemperature().subscribe(data => {
+    //   this.listeTemperatures = data
+    // })
+    setInterval(() => {
+      this.temperatureService.getTemperature().subscribe(data => {
+      this.listeTemperatures = data
+      }) 
+      }, 1000);
+
+    // this.listeTemperatures = new Observable(observer =>
+    //   setInterval(() => observer.next(this.temperatureService.getTemperature()), 10000)
+    // );
+    //this.getValueTemperature();
   }
 
-  reloadData(){
-  	this.temperatures = this.temperatureService.getTemperatureList();
-    console.log(this.temperatures[0]);
-  }
-
+  // getValueTemperature(){
+  //   this.listeTemperatures = this.temperatureService.getTemperature(); 
+  //   console.log(this.listeTemperatures);     
+  // }
+  
 }
