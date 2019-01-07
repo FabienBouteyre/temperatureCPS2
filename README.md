@@ -51,7 +51,11 @@ Start the Rabbitmq service using the following command: ```rabbitmq-server start
 Go on the web-interface ```http://localhost:15672/```. The credentials are: login: ```guest```, password: `guest`, by default.
 
 #### Create a queue
-Go the ```Queue``` tab and Add a new queue named ```queue1```
+Go to the ```Queue``` tab and Add a new queue named ```queue1```
+#### Create a binding
+Go to the ```Èxchanges``` tab.
+Click on ```amq.topic```.
+Open the ```Bindings``` dropdown. Enter ```queue1``` in the 'To queue' input and ```#``` in 'Routing key' input then Bind.
 
 
 ### IoT `Arduino MKR WiFi 1010`:
