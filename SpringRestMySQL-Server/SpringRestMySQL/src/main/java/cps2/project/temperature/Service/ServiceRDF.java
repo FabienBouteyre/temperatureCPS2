@@ -60,10 +60,6 @@ public class ServiceRDF {
         model.setNsPrefix("sensorData", sensorData);
         model.setNsPrefix("advice", advice);
 
-
-
-
-
         Resource res1 = model.createProperty(sensor, "sensorID");
             res1.addProperty(model.createProperty(xsd, "ID"), model.createTypedLiteral("Id of the sensor", XSD.integer.getURI()));
             res1.addProperty(RDFS.label, "Room Label");
@@ -78,10 +74,6 @@ public class ServiceRDF {
                 resSubSensorData.addProperty(RDFS.subClassOf, resSensorData.getURI());
                 resSubSensorData.addProperty(model.createProperty(xsd, "float"), model.createTypedLiteral("15.0", XSD.xfloat.getURI()));
                 resSubSensorData.addProperty(model.createProperty(xsd, "string"), model.createTypedLiteral("Unit", XSD.xstring.getURI()));
-
-
-
-
 
         Resource res = model.createProperty(url + "/Bob");
         Property dboDate3 = model.createProperty(geo, "lat");

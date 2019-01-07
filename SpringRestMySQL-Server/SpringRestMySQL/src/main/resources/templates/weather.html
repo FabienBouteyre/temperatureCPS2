@@ -11,10 +11,10 @@
     <title>Weather</title>
 </head>
 <body>
-    <div th:replace="head"></div>
+<div th:replace="head"></div>
 
-    <div class="container-fluid">
-        <form action="/weather/city" method="post">
+    <div class="container-fluid row justify-content-md-center">
+        <form action="/weather/city" method="post" class="col col-md-5">
             <div class="form-group row">
                 <label for="inputWeather" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
@@ -26,17 +26,43 @@
         </form>
     </div>
 
-    <div class="p-3 mb-2 bg-primary text-white" th:if="${mess}" >
-        <h5 th:utext="${mess.getName()}"></h5><br>
-        <h5 th:utext="${mess.getVisibility()}"></h5><br>
-        <h5 th:utext="${mess.getVisibility()}"></h5><br>
-        <h5 th:utext="${mess.getWeathers()[0].getDescription()}"></h5><br>
-        <h5 th:utext="${mess.getWeathers()[0].getMain()}"></h5><br>
-        <h5 th:utext="${mess.getBase()}"></h5><br>
-        <h5 th:utext="${mess.getCoord().getLat()}"></h5><br>
-        <h5 th:utext="${mess.getCoord().getLon()}"></h5><br>
-        <h5 th:utext="${mess.getMain().getTemp()}"></h5><br>
-        <h5 th:utext="${mess.getMain().getHumidity()}"></h5><br>
+    <div class="p-3 mb-2 row justify-content-md-center" th:if="${mess}">
+        <div class="col col-md-4">
+            <div class="form-group row">
+                <label for="city" class="col-sm-2 col-form-label">City:</label>
+                <div class="col-sm-10 form-control-plaintext" id="city" th:utext="${mess.getName()}"></div>
+            </div>
+            <div class="form-group row">
+                <label for="country" class="col-sm-2 col-form-label">Country:</label>
+                <div class="col-sm-10 form-control-plaintext" id="country" th:utext="${mess.getSys().getCountry()}"></div>
+            </div>
+            <div class="form-group row">
+                <label for="cord" class="col-sm-2 col-form-label">Coordinate:</label>
+                <div class="col-sm-10 form-control-plaintext" id="cord"
+                     th:utext="'Long: ' + ${mess.getCoord().getLon()} + ', Lat: ' + ${mess.getCoord().getLat()}"></div>
+            </div>
+            <div class="form-group row">
+                <label for="weather" class="col-sm-2 col-form-label">Weather:</label>
+                <div class="col-sm-10 form-control-plaintext ml-2" id="weather">
+                    <div th:each="weather, index : ${mess.weathers}">
+                        <div th:utext="${index.index + 1} + ' - Main: ' + ${weather.getMain()} + '<br> Description: ' + ${weather.getDescription()}"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="temp" class="col-sm-2 col-form-label">Temperature:</label>
+                <div class="col-sm-10 form-control-plaintext ml-2" id="temp">
+                    <div th:utext="' Temp: ' + ${mess.getMain().getTemp() - 275.15} + '<br> Temp MAX: ' + ${mess.getMain().getTemp_max() - 275.15}
+                    + '<br> Temp MIN: ' + ${mess.getMain().getTemp_min() - 275.15} + '<br> Humidity: ' + ${mess.getMain().getHumidity()}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="wind" class="col-sm-2 col-form-label">Wind:</label>
+                <div class="col-sm-10 form-control-plaintext ml-2" id="wind">
+                    <div th:utext="'Speed: ' + ${mess.getWind().getSpeed()} + '<br> Deg: ' + ${mess.getWind().getDeg()}"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

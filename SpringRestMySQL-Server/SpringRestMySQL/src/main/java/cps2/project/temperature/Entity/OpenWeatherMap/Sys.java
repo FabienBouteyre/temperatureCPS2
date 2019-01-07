@@ -1,7 +1,12 @@
 package cps2.project.temperature.Entity.OpenWeatherMap;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.time.LocalTime;
+import java.util.Date;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Sys {
@@ -19,10 +24,12 @@ public class Sys {
     private String country;
 
     @JsonProperty("sunrise")
-    private Integer sunrise;
+    @JsonFormat(pattern = "KK:mm a")
+    private Date sunrise;
 
     @JsonProperty("sunset")
-    private Integer sunset;
+    @JsonFormat(pattern = "KK:mm a")
+    private Date sunset;
 
     public Sys() {
     }
@@ -59,19 +66,19 @@ public class Sys {
         this.country = country;
     }
 
-    public Integer getSunrise() {
+    public Date getSunrise() {
         return sunrise;
     }
 
-    public void setSunrise(Integer sunrise) {
+    public void setSunrise(Date sunrise) {
         this.sunrise = sunrise;
     }
 
-    public Integer getSunset() {
+    public Date getSunset() {
         return sunset;
     }
 
-    public void setSunset(Integer sunset) {
+    public void setSunset(Date sunset) {
         this.sunset = sunset;
     }
 }

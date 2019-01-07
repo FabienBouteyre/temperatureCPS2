@@ -12,42 +12,52 @@
 </head>
 <body>
 <div th:replace="head"></div>
-<div class="container" >
+<div class="container">
 
-    <form th:object="${user}" th:action="@{/regist}" method="post">
-        <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Name</label>
-            <div class="col-sm-10">
-                <input th:field="*{name}" th:classappend="${nameError} ? 'is-invalid'" type="text" class="form-control" id="name">
-                <div th:if="${nameError}" th:utext="${nameError}" class="invalid-feedback" ></div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="surname" class="col-sm-2 col-form-label">Surname</label>
-            <div class="col-sm-10">
-                <input th:field="*{surn}" th:classappend="${surnError} ? 'is-invalid'" type="text" class="form-control" id="surname">
-                <div th:if="${surnError}" th:utext="${surnError}" class="invalid-feedback" ></div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-                <input th:field="*{email}" th:classappend="${emailError} ? 'is-invalid'" type="text" class="form-control" id="staticEmail">
-                <div th:if="${emailError}" th:utext="${emailError}" class="invalid-feedback" ></div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-                <input th:field="*{pass}" th:classappend="${passError} ? 'is-invalid'" type="password" class="form-control" id="inputPassword" placeholder="Password">
-                <div th:if="${passError}" th:utext="${passError}" class="invalid-feedback" ></div>
-            </div>
-        </div>
-        <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="text-center text-info my-5">
+        <h3>Registration</h3>
+    </div>
 
-    <div th:if="${mess}" class="p-3 mb-2 bg-primary text-white" th:utext="${mess}"></div>
+    <div class="row justify-content-md-center">
+        <form th:object="${user}" th:action="@{/regist}" method="post" class="col col-md-4">
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name:</label>
+                <div class="col-sm-10">
+                    <input th:field="*{name}" th:classappend="${nameError} ? 'is-invalid'" type="text"
+                           class="form-control" id="name">
+                    <div th:if="${nameError}" th:utext="${nameError}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="surname" class="col-sm-3 col-form-label">Surname:</label>
+                <div class="col-sm-9">
+                    <input th:field="*{surn}" th:classappend="${surnError} ? 'is-invalid'" type="text"
+                           class="form-control" id="surname">
+                    <div th:if="${surnError}" th:utext="${surnError}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10">
+                    <input th:field="*{email}" th:classappend="${emailError} ? 'is-invalid'" type="text"
+                           class="form-control" id="staticEmail">
+                    <div th:if="${emailError}" th:utext="${emailError}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Pass:</label>
+                <div class="col-sm-10">
+                    <input th:field="*{pass}" th:classappend="${passError} ? 'is-invalid'" type="password"
+                           class="form-control" id="inputPassword" placeholder="Password">
+                    <div th:if="${passError}" th:utext="${passError}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}">
+            <button type="submit" class="btn btn-primary btn-block">Send</button>
+        </form>
+
+        <div th:if="${mess}" class="p-3 mb-2 bg-primary text-white" th:utext="${mess}"></div>
+    </div>
 </div>
 
 <!-- Optional JavaScript -->
