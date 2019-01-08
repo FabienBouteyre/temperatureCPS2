@@ -11,6 +11,8 @@ public interface RepSensorData extends JpaRepository<SensorData, Long> {
 
     SensorData findTopByOrderByIdDesc();
 
+    SensorData findSensorDataById(Long id);
+
     List<SensorData> findBySensoridOrderByDateDesc(SensorID sensorID);
 
     SensorData findTopBySensoridOrderByDateDesc(SensorID sensorID);

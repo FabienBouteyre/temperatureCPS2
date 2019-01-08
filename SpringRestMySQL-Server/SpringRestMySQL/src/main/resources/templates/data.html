@@ -11,15 +11,9 @@
     <title>Sensor</title>
 </head>
 <body>
-
+<div th:replace="head"></div>
 <div class="container card-body border border-info rounded p-5" >
 
-    <div class="mt-5">
-        <a class="btn btn-info" th:href="@{/}" role="button">Home</a>
-        <a class="btn btn-info" th:href="@{/sensors/data/current}" role="button">Current data of sensors</a>
-        <a class="btn btn-info" th:href="@{/sensors/data}" role="button" id="update">Update</a>
-
-    </div>
 
     <table class="table table-hover">
         <thead>
@@ -31,8 +25,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="sensor: ${sensors}">
-            <td th:utext="${sensor.getId()}"></td>
+        <tr th:each="sensor, index: ${sensors}">
+            <td th:utext="${index.index}"></td>
             <td th:utext="${sensor.getRoom()}"></td>
             <td th:utext="${sensor.getDescrib()}"></td>
             <td><a th:href="@{'/sensors/data/' + ${sensor.getId()}}">To show</a></td>

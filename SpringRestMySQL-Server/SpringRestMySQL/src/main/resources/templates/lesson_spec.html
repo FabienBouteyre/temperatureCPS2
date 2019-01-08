@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+    <title>Sensor</title>
+</head>
+<body>
+
+<div class="container card-body border border-info rounded p-5" >
+
+    <div th:replace="head"></div>
+
+    <form th:action="@{/calendare/specialist}" method="post">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Specialition</th>
+                <th scope="col">Href</th>
+                <th scope="col">Del</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="spec, index: ${specialist}">
+                <td th:utext="${index.index}"></td>
+                <td th:utext="${spec.getName()}"></td>
+                <td><a th:href="@{'/calendare/lessons/' + ${spec.getId()}}">To show Lessons</a></td>
+                <td>
+                    <input type="hidden" name="id" th:value="${spec.getId()}">
+                    <button class="btn btn-info" type="submit">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/static/js/jquery-3.2.1.slim.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

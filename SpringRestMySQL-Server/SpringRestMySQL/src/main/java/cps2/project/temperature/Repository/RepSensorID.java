@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RepSensorID extends JpaRepository<SensorID, Long> {
 
     SensorID findByRoom(String room);
+    SensorID findByAddress(String mac);
 }

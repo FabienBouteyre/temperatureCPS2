@@ -8,16 +8,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 
-    <title>Hello, world!</title>
+    <title>Home</title>
 </head>
 <body>
 
-<div class="container card-body border border-info rounded p-5">
+<div th:replace="head"></div>
 
-    <div class="mt-5">
-        <a class="btn btn-info" th:href="@{/sensors/data}" role="button">List of sensors</a>
-        <a class="btn btn-info" th:href="@{/sensors/data/current}" role="button">Current data of sensors</a>
-    </div>
+
+    <div class="text-center text-success m-5"><h1>Welcome to Temperature of Building</h1></div>
 
 
 

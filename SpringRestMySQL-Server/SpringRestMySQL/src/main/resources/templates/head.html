@@ -1,0 +1,63 @@
+<div class=" container-fluid mb-3" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/static/content/logo.png}" width="30" height="30" class="d-inline-block align-top" alt="">
+            Temperature
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sensors
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/sensors/data}">Sensors Data</a>
+                        <a class="dropdown-item" th:href="@{/sensors/data/current}">Curent Sensors Data</a>
+                        <a class="dropdown-item" th:href="@{/sensors/data/manage}">Manage all Sensors</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        RDF
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <a class="dropdown-item" th:href="@{/api/rdf/ldjson}">LDJSON</a>
+                        <a class="dropdown-item" th:href="@{/api/rdf/turtle}">Turtle</a>
+                        <a class="dropdown-item" th:href="@{/api/rdf/n3}">N3</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Users
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" th:href="@{/userlist}">UserList</a>
+                        <a class="dropdown-item" th:href="@{/regist}">Registration</a>
+                        <a class="dropdown-item" th:href="@{/login}">Login</a>
+                        <form action="/logout" method="post">
+                            <button type="submit"  class="dropdown-item">Logout</button>
+                            <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}">
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="rsa" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        RSA
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" th:href="@{/rsa/}">Get Random Key</a>
+                        <a class="dropdown-item" th:href="@{/rsa/encrypt}">Encrypt</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/weather/city}">Weather</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

@@ -13,7 +13,9 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true,
+        securedEnabled = true,
+        jsr250Enabled = true)
 public class ConfigWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -36,12 +38,12 @@ public class ConfigWebSecurity extends WebSecurityConfigurerAdapter {
 //                .csrf().ignoringAntMatchers("/console/**")
 //                .and()
                 .authorizeRequests()
-                    .antMatchers( "/static/**", "/regist", "/sensors/**", "/api/**", "/", "/home").permitAll()
+                    .antMatchers( "/static/**", "/regist", "/sensors/**", "/api/**", "/", "/home", "/calendare/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
-                    .formLogin().loginPage("/login").permitAll().successForwardUrl("/home")
+                    .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home", true)
                 .and()
-                    .logout().permitAll();
+                    .logout().logoutUrl("/logout").permitAll().logoutSuccessUrl("/login");
     }
 
     @Override

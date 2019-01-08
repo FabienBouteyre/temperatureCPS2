@@ -5,6 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -18,15 +20,20 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "name")
+    @Size(min = 2, max = 20, message = "Name should be min-2 and max-20")
     private String name;
 
     @Column(name = "surn")
+    @Size(min = 2, max = 20, message = "Surname should be min-2 and max-20")
     private String surn;
 
     @Column(name = "email")
+    @Email(message = "please write correct email address")
+    @Size(min = 2, message = "Email should be min-2")
     private String email;
 
     @Column(name = "pass")
+    @Size(min = 5, max = 30, message = "Password should be min - 5 and max - 30")
     private String pass;
 
     @Column(name = "active")
