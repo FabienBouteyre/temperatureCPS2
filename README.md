@@ -72,6 +72,13 @@ To connect the app to the database, change the user and password in the ```appli
 Run as Spring Boot Application. 
 
 
+### Android App :
+
+Download the appropriate JDK for your system. We are currently on JDK 8.
+Install Android Studio.
+Import the project. Open Android Studio, click ```Open an existing Android Studio project``` and select the project. Gradle will build the project.
+
+
 ## Start
 
 ### Start the Angular app
@@ -85,6 +92,9 @@ Start the Rabbitmq service using the following command: ```rabbitmq-server start
 
 ### Start the Spring Boot App
 Use your IDE to lauch the Spring Boot App.
+
+### Start the Android App
+In Android Studio click ```Run > Run 'app'```. After the project builds you'll be prompted to build or launch an emulator.
 
 
 
