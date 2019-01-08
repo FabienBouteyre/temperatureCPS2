@@ -16,6 +16,8 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,7 +29,8 @@ public class Subscriber {
     @Autowired
     private RepSensorData repSensorData;
 
-    public static ArrayList<SensorID> sensorIDs = new ArrayList<SensorID>();
+    public static Set<SensorID> sensorIDs = new HashSet<SensorID>() {
+    };
 
     @Value("${javainuse.rabbitmq.queue}")
     public String queue;
@@ -52,13 +55,16 @@ public class Subscriber {
                     repSensorData.save(sensorData);
                 }
                 if (sensorData.isButton()){
-                    System.out.println(" ********************** button 1 ");
-                    if (!sensorIDs.contains(sensorID1))
+//                    System.out.println(" ********************** button 1 ");
+                    if (sensorIDs.stream().noneMatch( any -> sensorID1.getAddress().equals(any.getAddress()))) {
                         sensorIDs.add(sensorID1);
+                    }
                 }else {
-                    System.out.println("********************** button 0 ");
-                    sensorIDs = (ArrayList<SensorID>) sensorIDs.stream().filter(sensor -> !sensorID1.getAddress().equals(sensor.getAddress())).collect(Collectors.toList());
+//                    System.out.println("********************** button 0 ");
+                    sensorIDs = (Set<SensorID>) sensorIDs.stream().filter(sensor -> !sensorID1.getAddress().equals(sensor.getAddress())).collect(Collectors.toSet());
                 }
+                System.out.println(sensorIDs);
+
             }else{
                 sensorID.setDescrib("example");
                 repSensorID.save(sensorID);

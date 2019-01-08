@@ -96,4 +96,14 @@ public class SensorID {
     public List<SensorData> getSensorData() {
         return sensorData;
     }
+
+    @Override
+    public String toString() {
+        return "SensorID{" +
+                "id=" + id +
+                ", room='" + room + '\'' +
+                ", describ='" + describ + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

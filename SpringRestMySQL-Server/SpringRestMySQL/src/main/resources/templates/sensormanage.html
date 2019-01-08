@@ -25,6 +25,7 @@
             <th scope="col">Room</th>
             <th scope="col">Describ</th>
             <th scope="col">Mac</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +35,15 @@
             <td th:utext="${sensor.getRoom()}"></td>
             <td th:utext="${sensor.getDescrib()}"></td>
             <td th:utext="${sensor.getAddress()}"></td>
+            <td>
+                <div class="btn-group">
+                    <form th:action="@{/sensors/data/edit}" method="post">
+                        <input type="hidden" name="id" th:value="${sensor.getId()}">
+                        <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}">
+                        <button type="submit" class="btn btn-warning">Change</button>
+                    </form>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

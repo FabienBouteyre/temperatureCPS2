@@ -8,10 +8,10 @@ import cps2.project.temperature.Service.Rabbitmq.Subscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -56,6 +56,20 @@ public class SensorContr {
         return "sensormanage";
     }
 
-
+    @PostMapping("/data/edit")
+    public String PostEditSensor(@RequestParam(value = "id", required = false) SensorID sensorID, @RequestParam HashMap<String, String> map, Model model){
+        if (!StringUtils.isEmpty(sensorID) && Subscriber.sensorIDs.stream().anyMatch(sensor -> sensorID.getAddress().equals(sensor.getAddress()))) {
+            model.addAttribute("sensor", sensorID);
+            if (!StringUtils.isEmpty(map.get("room"))) {
+                sensorID.setRoom(map.get("room"));
+                if (!StringUtils.isEmpty(map.get("description")))
+                    sensorID.setDescrib(map.get("description"));
+                repSensorID.save(sensorID);
+            }
+            model.addAttribute("mess", "Updated");
+            return "sensoredit";
+        }else
+            return "sensormanage";
+    }
 
 }
