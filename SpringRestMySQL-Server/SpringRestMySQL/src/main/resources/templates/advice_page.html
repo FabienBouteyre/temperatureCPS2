@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+    <title>Sensor</title>
+</head>
+<body>
+
+<div class="container card-body border border-info rounded p-5" >
+
+    <div th:replace="head"></div>
+
+    <form th:action="@{/advice/all}" method="post">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Type</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Room</th>
+                <th scope="col">Light</th>
+                <th scope="col">Room temperature</th>
+                <th scope="col">Outside temperature</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="advice, index: ${adviceList}">
+                <td th:utext="${advice.getId()}"></td>
+                <td th:utext="${advice.getType()}"></td>
+                <td th:utext="${advice.getDescription()}"></td>
+                <td th:utext="${advice.getDate()}"></td>
+                <td th:utext="${advice.getFloor()}"></td>
+                <td th:utext="${advice.getRoom()}"></td>
+                <td th:utext="${advice.getLight()}"></td>
+                <td th:utext="${advice.getRoomTemperature()}"></td>
+                <td th:utext="${advice.getOutsideTemperature()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/static/js/jquery-3.2.1.slim.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
