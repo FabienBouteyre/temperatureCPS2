@@ -4,7 +4,6 @@ package cps2.project.temperature.Entity.Calendars;
 import com.rabbitmq.client.AMQP;
 
 import javax.persistence.*;
-import javax.xml.ws.BindingType;
 import java.util.List;
 
 @Entity
