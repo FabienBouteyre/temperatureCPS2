@@ -8,6 +8,7 @@ import { DxVectorMapModule } from 'devextreme-angular';
 import { text } from '@angular/core/src/render3';
 import { delay } from 'q';
 
+
 @Component({
   selector: 'app-floor1',
   providers: [ TemperatureService ],
@@ -20,12 +21,15 @@ export class Floor1Component implements OnInit {
   private roomsData: FeatureCollection;
   private buildingData: FeatureCollection;
   private listeTemperatures: Temperature[];
+  private elem:any;
 
-  constructor(private temperatureService: TemperatureService) {}  
+  constructor(private temperatureService: TemperatureService) {
+  }
   
   ngOnInit() {
     this.roomsData = this.temperatureService.getRoomsDataFloor1();
-    //this.customizeLayers = this.customizeLayers.bind(this);
+    this.customizeLayers = this.customizeLayers.bind(this);
+    this.customizeTooltip = this.customizeTooltip.bind(this);
     this.buildingData = this.temperatureService.getBuildingData();
     this.projection = projection({
       to: function (coordinates) {
@@ -34,18 +38,13 @@ export class Floor1Component implements OnInit {
               return [coordinates[0] * 100, coordinates[1] * 100];
           }
     });
-    this.temperatureService.getTemperature().subscribe(data => {
-      this.listeTemperatures = data
-      })
-      console.log(this.listeTemperatures)
-    setInterval(() => {
+    
+    setInterval(() => {  
       this.temperatureService.getTemperature().subscribe(data => {
-      this.listeTemperatures = data
-      this.customizeLayers = this.customizeLayers.bind(this);
-      console.log(this.listeTemperatures)
-      //console.log(this.getValue("Room 101"))
-      }) 
-      }, 3000);
+      this.listeTemperatures = data;
+      }); 
+      this.customizeLayers(this.elem);
+      }, 1000);
   }
 
   getValue(room: string): string{
@@ -56,32 +55,56 @@ export class Floor1Component implements OnInit {
     }
     return ""
   }
+  getDescrib(room: string): string{
+    for(var i=0;this.listeTemperatures.length;i++){
+      if(this.listeTemperatures[i].room==room){
+        return this.listeTemperatures[i].describ;
+      }
+    }
+    return ""
+  }
 
   customizeTooltip(arg) {
-    if(arg.layer.name === "rooms")
-        return {
-            text: arg.attribute("name")
+    if(arg.layer.name === "rooms"){
+      if(this.listeTemperatures != undefined){
+        try {
+          return {
+            text: arg.attribute("name")+"<br>"+this.getDescrib(arg.attribute("name"))
         };
-  
+        } catch (error) {
+          return {
+            html: arg.attribute("name")
+        };
+        }
+      }
+    }  
   }
   customizeLayers(elements) {
+    this.elem = elements;
 
-    console.log("yo")
     elements.forEach((element) => {
       
-      // if(element.attribute("name")=="Room 101" && this.listeTemperatures!=undefined){
-      //   element.attribute("value", this.getValue("Room 101"));
-      // }
-      if(element.attribute("name")=="Room 101"){
-        element.attribute("value", "10");
+      if(this.listeTemperatures != undefined){
+        try {
+          if (element.attribute("name")=="WC"){
+            element.attribute("value","WC");
+          } else {
+            element.attribute("value", this.getValue(element.attribute("name")));
+          }
+        } catch (error) {
+          element.attribute("value", "?");
+        }
       }
 
-      
-      if(parseInt(element.attribute("value"))>30){
+      if(element.attribute("value") == "?" || element.attribute("value") == "WC"){
+        element.applySettings({
+          color: "#808080"
+      });
+      }
+      else if(parseInt(element.attribute("value"))>30){
         element.applySettings({
           color: "#B22222"
       });
-      
       } else if (parseInt(element.attribute("value"))<15){
         element.applySettings({
           color: "#4169E1"

@@ -91,7 +91,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 201",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -106,7 +106,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 202",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -121,7 +121,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 203",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -136,7 +136,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 204",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -151,7 +151,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 205",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -165,8 +165,8 @@ let roomsDataFloor2: FeatureCollection = {
         }, {
             type: "Feature",
             properties: {
-                name: "206",
-                value: "25"
+                name: "Room 206",
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -226,7 +226,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 207",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -241,7 +241,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 208",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -256,7 +256,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 209",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -271,7 +271,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 210",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -286,7 +286,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 211",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -331,7 +331,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 212",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -346,7 +346,7 @@ let roomsDataFloor2: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 213",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -362,7 +362,6 @@ let roomsDataFloor2: FeatureCollection = {
     ]
 };
 
-
 let roomsDataFloor1: FeatureCollection = {
     type: "FeatureCollection",
     features: [
@@ -370,7 +369,7 @@ let roomsDataFloor1: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 101",
-                value: "31"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -385,7 +384,7 @@ let roomsDataFloor1: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 102",
-                value: "10"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -400,7 +399,7 @@ let roomsDataFloor1: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 103",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -430,7 +429,7 @@ let roomsDataFloor1: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 104",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -445,7 +444,7 @@ let roomsDataFloor1: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 105",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -460,7 +459,7 @@ let roomsDataFloor1: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 106",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",
@@ -475,7 +474,7 @@ let roomsDataFloor1: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Room 107",
-                value: "25"
+                value: "?"
             },
             geometry: {
                 type: "Polygon",

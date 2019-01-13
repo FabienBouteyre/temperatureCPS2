@@ -3,17 +3,17 @@
     [projection]="projection"> 
     <dxo-tooltip 
         [enabled]="true" 
-        [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+        [customizeTooltip]="customizeTooltip">
+    </dxo-tooltip>
     <dxi-layer 
         [hoverEnabled]="false" 
-        [dataSource]="buildingData" 
-        name="building"></dxi-layer>
+        [dataSource]= "buildingData" 
+        name="building">
+    </dxi-layer>
     <dxi-layer 
-        color="#B22222" 
         [dataSource]="roomsData" 
+        [customize]="customizeLayers"
         name="rooms">
-        <dxo-label [enabled]="true" dataField="name">
-             <dxo-font [size]="12"></dxo-font>
-        </dxo-label>
-    </dxi-layer>    
+        <dxo-label [enabled]="true" dataField="value"  [customizeText]="customizeText"></dxo-label>
+    </dxi-layer>
 </dx-vector-map>
