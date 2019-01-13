@@ -5,6 +5,8 @@ import { Temperature } from '../temperature';
 import { FeatureCollection, Feature, TemperatureService } from '../temperature.service';
 
 import { DxVectorMapModule } from 'devextreme-angular';
+import { text } from '@angular/core/src/render3';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-floor1',
@@ -23,9 +25,7 @@ export class Floor1Component implements OnInit {
   
   ngOnInit() {
     this.roomsData = this.temperatureService.getRoomsDataFloor1();
-    this.customizeLayers = this.customizeLayers.bind(this);
-    this.customizeLabel = this.customizeLabel.bind(this);
-    console.log(this.roomsData.features[0].properties.name);
+    //this.customizeLayers = this.customizeLayers.bind(this);
     this.buildingData = this.temperatureService.getBuildingData();
     this.projection = projection({
       to: function (coordinates) {
@@ -34,16 +34,27 @@ export class Floor1Component implements OnInit {
               return [coordinates[0] * 100, coordinates[1] * 100];
           }
     });
-    let temptemp = 1;
-     setInterval(() => {
-       //this.roomsDatabis.features[0].properties.name = this.roomsDatabis.features[0].properties.name+"k";
-       let lables = document.getElementsByClassName("dxm-layer-labels")
-       temptemp = temptemp + 1;
+    this.temperatureService.getTemperature().subscribe(data => {
+      this.listeTemperatures = data
+      })
+      console.log(this.listeTemperatures)
+    setInterval(() => {
+      this.temperatureService.getTemperature().subscribe(data => {
+      this.listeTemperatures = data
+      this.customizeLayers = this.customizeLayers.bind(this);
+      console.log(this.listeTemperatures)
+      //console.log(this.getValue("Room 101"))
+      }) 
+      }, 3000);
+  }
 
-      //  console.log(lables.item(0).childNodes[0].childNodes[0].replaceWith(temptemp.toString()));
-      //  console.log(lables.item(0).childNodes[0].childNodes[1].replaceWith(""));
-       
-       }, 2000);
+  getValue(room: string): string{
+    for(var i=0;this.listeTemperatures.length;i++){
+        if(this.listeTemperatures[i].room==room){
+          return this.listeTemperatures[i].sensorDataEntity.temp;
+        }
+    }
+    return ""
   }
 
   customizeTooltip(arg) {
@@ -53,29 +64,35 @@ export class Floor1Component implements OnInit {
         };
   
   }
-  customizeLabel = (arg: any) => {
-    if (arg.value > 30) {
-        return {
-            visible: true,
-            backgroundColor: "#ff7c7c",
-            customizeText: function (e: any) {
-                return e.valueText + "&#176F";
-            }
-        };
-    }
-}
+  customizeLayers(elements) {
 
-customizeText = (arg: any) => {
-    return arg.value + "&#176F";
-}
+    console.log("yo")
+    elements.forEach((element) => {
+      
+      // if(element.attribute("name")=="Room 101" && this.listeTemperatures!=undefined){
+      //   element.attribute("value", this.getValue("Room 101"));
+      // }
+      if(element.attribute("name")=="Room 101"){
+        element.attribute("value", "10");
+      }
 
-customizeLayers(elements) {
-  elements.forEach((element) => {
-    element.applySettings({
-      color: "#B22222"
+      
+      if(parseInt(element.attribute("value"))>30){
+        element.applySettings({
+          color: "#B22222"
+      });
+      
+      } else if (parseInt(element.attribute("value"))<15){
+        element.applySettings({
+          color: "#4169E1"
+      });
+      } else if (parseInt(element.attribute("value"))>=15 || parseInt(element.attribute("value"))<=30) {
+        element.applySettings({
+          color: "#008000"
+      });
+      }
+    
   });
-  });
-  
-}
-  
+    
+  }
 }
