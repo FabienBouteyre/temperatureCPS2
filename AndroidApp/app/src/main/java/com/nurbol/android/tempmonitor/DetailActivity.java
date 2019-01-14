@@ -22,12 +22,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.nitri.gauge.Gauge;
+
 public class DetailActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    TextView tempTextView, hmdtTextView, lightTextView, dateTextView, roomTextView;
+    TextView tempTextView, hmdtTextView, lightTextView, dateTextView;
     private RequestQueue mQueue;
     private static final String REQUEST_URL = "http://192.168.137.1:8080/api/sensors/data/";
     private String Url;
     private SwipeRefreshLayout mSwipeLayout;
+    private Gauge gauge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +43,17 @@ public class DetailActivity extends AppCompatActivity implements SwipeRefreshLay
                 R.color.blue_swipe, R.color.green_swipe,
                 R.color.orange_swipe, R.color.red_swipe);
 
-        tempTextView = (TextView) findViewById(R.id.tempTextView);
+        gauge = findViewById(R.id.gauge);
         hmdtTextView = (TextView) findViewById(R.id.hmdtTextView);
         lightTextView = (TextView) findViewById(R.id.lightTextView);
         dateTextView = (TextView) findViewById(R.id.dateTextView);
-        roomTextView = (TextView) findViewById(R.id.roomTextView);
 
         String sensorId = getIntent().getStringExtra("id");
         String sensorRoom = getIntent().getStringExtra("room");
 
         Url = REQUEST_URL + sensorId;
 
-        roomTextView.setText("Room " + sensorRoom);
+        gauge.setLowerText("Room " + sensorRoom);
 
         mQueue = Volley.newRequestQueue(this);
         jsonParse();
@@ -85,7 +87,7 @@ public class DetailActivity extends AppCompatActivity implements SwipeRefreshLay
                             String date = dataEntity.getString("date");
                             String light = dataEntity.getString("light");
 
-                            tempTextView.setText(temp + "°C");
+                            gauge.moveToValue(Integer.parseInt(temp));
                             hmdtTextView.setText(hmdt + "%");
                             lightTextView.setText(light);
                             dateTextView.setText(dateFormat(date));

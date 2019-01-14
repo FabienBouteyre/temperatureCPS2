@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent numbersIntent = new Intent(MainActivity.this, SearchActivity.class);
+                Intent numbersIntent = new Intent(MainActivity.this, DetailActivity.class);
                 startActivity(numbersIntent);
             }
         });
