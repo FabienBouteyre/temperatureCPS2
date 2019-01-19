@@ -3,7 +3,13 @@ package com.nurbol.android.tempmonitor;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,7 +37,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class SearchActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, NavigationView.OnNavigationItemSelectedListener {
+    private DrawerLayout drawer;
     Button goButton, filterButton;
     EditText roomEditText, firstTempEditText, secondTempEditText;
     private SwipeRefreshLayout mSwipeLayout;
@@ -45,6 +53,18 @@ public class SearchActivity extends AppCompatActivity implements SwipeRefreshLay
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
         //Swipe Refresh
         mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
         mSwipeLayout.setOnRefreshListener(this);
@@ -129,6 +149,7 @@ public class SearchActivity extends AppCompatActivity implements SwipeRefreshLay
             }
         });
 
+
     }
 
     //Swipe refresher
@@ -208,6 +229,35 @@ public class SearchActivity extends AppCompatActivity implements SwipeRefreshLay
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.nav_weather:
+                Intent weatherIntent = new Intent(SearchActivity.this, WeatherActivity.class);
+                startActivity(weatherIntent);
+                break;
+            case R.id.nav_advice:
+                Intent adviceIntent = new Intent(SearchActivity.this, WeatherActivity.class);
+                startActivity(adviceIntent);
+                break;
+            case R.id.nav_logout:
+                Intent logoutIntent = new Intent(SearchActivity.this, MainActivity.class);
+                startActivity(logoutIntent);
+                break;
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     /*    private class TemperatureAsyncTask extends AsyncTask<String, Void, List<Temperature>> {
      *//**
