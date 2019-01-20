@@ -31,10 +31,10 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:label="Building"
             android:parentActivityName=".AdminUserActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AdminUserActivity" />
@@ -57,6 +57,11 @@
         <activity
             android:name=".WeatherActivity"
             android:label="Weather"
+            android:parentActivityName=".SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdviceActivity"
+            android:label="Advice"
             android:parentActivityName=".SearchActivity"
             android:screenOrientation="portrait"></activity>
     </application>

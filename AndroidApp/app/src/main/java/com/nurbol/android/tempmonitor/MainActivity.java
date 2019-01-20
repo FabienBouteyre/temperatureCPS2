@@ -14,17 +14,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView start = (TextView) findViewById(R.id.start);
+//        TextView start = (TextView) findViewById(R.id.start);
         Button sign_in_button = (Button) findViewById(R.id.sign_in_button);
         Button sign_up_button = (Button) findViewById(R.id.sign_up_button);
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent numbersIntent = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(numbersIntent);
-            }
-        });
+//        start.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent numbersIntent = new Intent(MainActivity.this, SearchActivity.class);
+//                startActivity(numbersIntent);
+//            }
+//        });
 
         sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override

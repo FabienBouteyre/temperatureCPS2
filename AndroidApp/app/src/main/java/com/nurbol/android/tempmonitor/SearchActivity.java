@@ -237,7 +237,7 @@ public class SearchActivity extends AppCompatActivity implements SwipeRefreshLay
                 startActivity(weatherIntent);
                 break;
             case R.id.nav_advice:
-                Intent adviceIntent = new Intent(SearchActivity.this, WeatherActivity.class);
+                Intent adviceIntent = new Intent(SearchActivity.this, AdviceActivity.class);
                 startActivity(adviceIntent);
                 break;
             case R.id.nav_logout:

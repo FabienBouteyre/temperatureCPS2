@@ -70,16 +70,16 @@
                 android:textColor="#ffffffff"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/start"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autoLink="web"
-                android:gravity="bottom|center_horizontal"
-                android:text="Skip it"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimary" />
+            <!--<TextView-->
+                <!--android:id="@+id/start"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:autoLink="web"-->
+                <!--android:gravity="bottom|center_horizontal"-->
+                <!--android:text="Skip it"-->
+                <!--android:textAllCaps="true"-->
+                <!--android:textColor="@color/colorPrimary" />-->
         </LinearLayout>
     </LinearLayout>
 
