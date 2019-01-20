@@ -57,7 +57,7 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/name"
+                        android:id="@+id/reg_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -69,7 +69,7 @@
                         android:textColorHint="#ffffffff" />
 
                     <EditText
-                        android:id="@+id/surname"
+                        android:id="@+id/reg_surname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -81,7 +81,7 @@
                         android:textColorHint="#ffffffff" />
 
                     <EditText
-                        android:id="@+id/email"
+                        android:id="@+id/reg_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -93,7 +93,7 @@
                         android:textColorHint="#ffffffff" />
 
                     <EditText
-                        android:id="@+id/password"
+                        android:id="@+id/reg_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -105,7 +105,7 @@
                         android:textColorHint="#ffffffff" />
 
                     <Button
-                        android:id="@+id/email_sign_in_button"
+                        android:id="@+id/email_sign_up_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,28 +55,29 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edt_username = et_username.getText().toString();
-                edt_password = et_password.getText().toString();
-                newUrl = REQUEST_URL + edt_username;
+                if (checkDataEntered() == true) {
+                    edt_username = et_username.getText().toString();
+                    edt_password = et_password.getText().toString();
+                    newUrl = REQUEST_URL + edt_username;
 
-                jsonParse();
+                    jsonParse();
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        if (edt_password.equals(password)) {
-                            Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast toast = Toast.makeText(getApplicationContext(),
-                                    "Wrong username or password",
-                                    Toast.LENGTH_SHORT);
-                            toast.show();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            if (edt_password.equals(password)) {
+                                Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast toast = Toast.makeText(getApplicationContext(),
+                                        "Wrong username or password",
+                                        Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
                         }
-                    }
-                }, 4000);
+                    }, 4000);
 
-
+                }
             }
         });
     }
@@ -102,5 +105,31 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         mQueue.add(request);
+    }
+
+    boolean isEmail(EditText text) {
+        CharSequence email = text.getText().toString();
+        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
+    boolean checkDataEntered() {
+        if (isEmail(et_username) == false) {
+            Toast.makeText(this, "Enter valid email!", Toast.LENGTH_SHORT).show();
+            et_username.setError("Enter valid email!");
+            return false;
+        }
+
+        if (isEmpty(et_password)) {
+            Toast.makeText(this, "Enter password!", Toast.LENGTH_SHORT).show();
+            et_password.setError("Enter password!");
+            return false;
+        }
+
+        return true;
     }
 }
