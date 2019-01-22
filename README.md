@@ -46,6 +46,7 @@ Create the database entering these following commands:
 
 ```use tempBDD; ```
 
+Import the schema of ```tempbdd.sql``` in the main folder
 
 
 ### RabbitMQ:

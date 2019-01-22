@@ -1,0 +1,30 @@
+.blocAdvice {
+  display: inline-block;
+  width: 350px;
+  height: 250px;
+  margin: 20px;
+}
+
+ngb-alert {
+  width: 330px;
+  height: 200px;
+  margin-bottom: 5px;
+}
+
+button {
+  font-size: 20px;
+  padding: 5px;
+  background-color: #337ab7;
+  color: white;
+  border-radius: 20%;
+  border: 2px solid;
+  border-color: #286090;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #286090;
+  color: white;
+}

@@ -1,8 +1,6 @@
 package cps2.project.temperature.Entity.Calendars;
 
 
-import com.rabbitmq.client.AMQP;
-
 import javax.persistence.*;
 import java.util.List;
 

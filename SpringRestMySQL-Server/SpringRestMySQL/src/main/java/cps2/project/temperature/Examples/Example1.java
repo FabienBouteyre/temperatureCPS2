@@ -5,20 +5,6 @@ import java.util.Scanner;
 
 class Example1 {
 
-
-//    public static void main(String[] args) {
-//        Scanner sc = new Scanner(System.in);
-//        String str;
-//
-//        toPrint("Insert number");
-//        str = sc.next();
-//
-//        float num = Float.parseFloat(str);
-//
-//        boolean isInteger = Math.round(num) == (double) num;
-//        toPrint("" + isInteger);
-//    }
-
     public static void main(String[] args){
         int p, q, n, ni, e;
         int k = 1;
@@ -35,9 +21,6 @@ class Example1 {
 
         n = p * q;
         ni = (p - 1)*(q - 1);
-//        e = (int) (Math.random() * ni);
-//        if (e%2 == 0)
-//            e += 1;
         e = 11;
 
         while (true){

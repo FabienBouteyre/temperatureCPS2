@@ -1,6 +1,5 @@
 package cps2.project.temperature.Service;
 
-import cps2.project.temperature.Entity.SensorData;
 import cps2.project.temperature.Repository.RepSensorData;
 import cps2.project.temperature.Repository.RepSensorID;
 import org.apache.jena.rdf.model.Model;

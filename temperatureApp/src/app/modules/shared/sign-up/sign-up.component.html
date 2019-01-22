@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <h4>Sign up to the app</h4>
+
+  <div class="alert alert-danger" [hidden]="!authService.getSignUpUnsuccessful()">
+    This email may be desactivated or already used.
+  </div>
+
+  <form role="form" #signUpForm="ngForm" (submit)="signUp()">
+    <div class="form-group">
+      <label for="nameSignUp"><br />Name :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nameSignUp"
+        name="name"
+        required
+        minlength="2"
+        maxlength="20"
+        [(ngModel)]="newUser.name"
+        #nameSignUp="ngModel"
+      />
+      <div *ngIf="nameSignUp.invalid && (nameSignUp.dirty || nameSignUp.touched)" class="alert alert-danger">
+        <div *ngIf="nameSignUp.errors.required">Name is required.</div>
+        <div *ngIf="nameSignUp.errors.minlength">Name must be at least 2 characters long.</div>
+        <div *ngIf="nameSignUp.errors.maxlength">Name must be less than 20 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="surnSignUp">Surname :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="surnSignUp"
+        name="surn"
+        required
+        minlength="2"
+        maxlength="20"
+        [(ngModel)]="newUser.surn"
+        #surnSignUp="ngModel"
+      />
+      <div *ngIf="surnSignUp.invalid && (surnSignUp.dirty || surnSignUp.touched)" class="alert alert-danger">
+        <div *ngIf="surnSignUp.errors.required">Surname is required.</div>
+        <div *ngIf="surnSignUp.errors.minlength">Surname must be at least 2 characters long.</div>
+        <div *ngIf="surnSignUp.errors.maxlength">Surname must be less than 20 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="emailSignUp">Email :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="emailSignUp"
+        name="email"
+        required
+        minlength="2"
+        email
+        [(ngModel)]="newUser.email"
+        #emailSignUp="ngModel"
+      />
+      <div *ngIf="emailSignUp.invalid && (emailSignUp.dirty || emailSignUp.touched)" class="alert alert-danger">
+        <div *ngIf="emailSignUp.errors.required">Email is required.</div>
+        <div *ngIf="emailSignUp.errors.minlength">Email must be at least 2 characters long.</div>
+        <div *ngIf="emailSignUp.errors.email">Email must be a valid email.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="passSignUp">Password :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="passSignUp"
+        name="pass"
+        required
+        minlength="5"
+        maxlength="30"
+        [(ngModel)]="newUser.pass"
+        #passSignUp="ngModel"
+      />
+      <div *ngIf="passSignUp.invalid && (passSignUp.dirty || passSignUp.touched)" class="alert alert-danger">
+        <div *ngIf="passSignUp.errors.required">Password is required.</div>
+        <div *ngIf="passSignUp.errors.minlength">Password must be at least 5 characters long.</div>
+        <div *ngIf="passSignUp.errors.maxlength">Password must be less than 30 characters long.</div>
+      </div>
+    </div>
+    <div class="btn-toolbar">
+      <button type="submit" class="btn btn-primary" [disabled]="signUpForm.form.invalid">Confirm</button>
+      <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

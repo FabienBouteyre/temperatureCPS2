@@ -1,13 +1,45 @@
-<h1 align="center">
-  Temperature in a smart bulding
-</h1>
-<nav class="navbar navbar-default">
-  <div class="container-fluid"> 
-    <ul class="nav navbar-nav">
-      <li routerLinkActive="active"><a routerLink="floor1">Floor 1</a></li>
-      <li routerLinkActive="active"><a routerLink="floor2">Floor 2</a></li>
-    </ul>
+<div class="header">
+  <h1 align="center">Temperature in a smart building <br /><br /></h1>
+  <nav class="navbar navbar-inverse" *ngIf="authService.isUser">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav ">
+        <li *ngIf="authService.isUser" routerLinkActive="active"><a routerLink="floor1">Floor 1</a></li>
+        <li *ngIf="authService.isUser" routerLinkActive="active"><a routerLink="floor2">Floor 2</a></li>
+        <li *ngIf="authService.isAdmin" routerLinkActive="active"><a routerLink="advice">Advice</a></li>
+        <li *ngIf="authService.isAdmin" routerLinkActive="active"><a routerLink="admin">Admin</a></li>
+      </ul>
+      <nav class="navbar-right">
+        <button
+          *ngIf="authService.isUser"
+          routerLinkActive="active"
+          (click)="logout()"
+          class="btn btn-danger navbar-btn"
+        >
+          <span class="glyphicon">&#xe163;</span>&nbsp;Sign Out
+        </button>
+      </nav>
+    </div>
+  </nav>
+
+  <div *ngIf="!authService.isUser" class="welcome">
+    <h3>Welcome to the application !</h3>
+
+    <div class="card-body text-center">
+      <p class="card-text">
+        <button type="button" class="btn btn-primary center-block" routerLinkActive="active" routerLink="/login">
+          <span class="glyphicon glyphicon-log-in">&nbsp;</span>Login
+        </button>
+      </p>
+    </div>
+
+    <div class="card-body text-center">
+      <p class="card-text">
+        <button type="button" class="btn btn-primary center-block " routerLinkActive="active" routerLink="/sign-up">
+          <span class="glyphicon glyphicon-user">&nbsp;</span>Sign Up
+        </button>
+      </p>
+    </div>
   </div>
-</nav>
+</div>
 
 <router-outlet></router-outlet>

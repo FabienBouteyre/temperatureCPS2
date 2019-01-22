@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <h4>List of advice</h4>
+
+  <div *ngFor="let advice of listAdvice" class="blocAdvice">
+    <ngb-alert [dismissible]="false">
+      <strong> New advice</strong> <br /><br />
+      <ul>
+        <li>Date: {{ advice.date }}</li>
+        <li>Room: {{ advice.room }}</li>
+        <li>{{ advice.description }}</li>
+      </ul>
+    </ngb-alert>
+    <button (click)="ackAdvice(advice.id)">Done</button>
+  </div>
+</div>

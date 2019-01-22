@@ -1,0 +1,230 @@
+<div class="container-fluid">
+  <div [hidden]="!showAddButton">
+    <button class="btn btn-primary" (click)="displayAddForm(); addForm.reset()">
+      <span class="glyphicon glyphicon-user"></span> &nbsp; Add new user
+    </button>
+  </div>
+
+  <form role="form" #addForm="ngForm" (submit)="addUser()" [hidden]="!showAddForm">
+    <h4>Add a user</h4>
+
+    <div class="alert alert-danger" [hidden]="!showAlertAdd">
+      This email address is already used. Try with another one.
+    </div>
+
+    <div class="form-group">
+      <label for="nameAdd"><br />Name :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nameAdd"
+        name="name"
+        required
+        minlength="2"
+        maxlength="20"
+        [(ngModel)]="newUser.name"
+        #nameAdd="ngModel"
+      />
+      <div *ngIf="nameAdd.invalid && (nameAdd.dirty || nameAdd.touched)" class="alert alert-danger">
+        <div *ngIf="nameAdd.errors.required">Name is required.</div>
+        <div *ngIf="nameAdd.errors.minlength">Name must be at least 2 characters long.</div>
+        <div *ngIf="nameAdd.errors.maxlength">Name must be less than 20 characters long.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="surnAdd">Surname :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="surnAdd"
+        name="surn"
+        required
+        minlength="2"
+        maxlength="20"
+        [(ngModel)]="newUser.surn"
+        #surnAdd="ngModel"
+      />
+      <div *ngIf="surnAdd.invalid && (surnAdd.dirty || surnAdd.touched)" class="alert alert-danger">
+        <div *ngIf="surnAdd.errors.required">Surname is required.</div>
+        <div *ngIf="surnAdd.errors.minlength">Surname must be at least 2 characters long.</div>
+        <div *ngIf="surnAdd.errors.maxlength">Surname must be less than 20 characters long.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="emailAdd">Email :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="emailAdd"
+        name="email"
+        required
+        minlength="2"
+        email="true"
+        [(ngModel)]="newUser.email"
+        #emailAdd="ngModel"
+      />
+      <div *ngIf="emailAdd.invalid && (emailAdd.dirty || emailAdd.touched)" class="alert alert-danger">
+        <div *ngIf="emailAdd.errors.required">Email is required.</div>
+        <div *ngIf="emailAdd.errors.minlength">Email must be at least 2 characters long.</div>
+        <div *ngIf="emailAdd.errors.email">Email must be a valid email.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="passAdd">Password :</label>
+      <input
+        type="password"
+        class="form-control"
+        id="passAdd"
+        name="pass"
+        required
+        minlength="5"
+        maxlength="30"
+        [(ngModel)]="newUser.pass"
+        #passAdd="ngModel"
+      />
+      <div *ngIf="passAdd.invalid && (passAdd.dirty || passAdd.touched)" class="alert alert-danger">
+        <div *ngIf="passAdd.errors.required">Password is required.</div>
+        <div *ngIf="passAdd.errors.minlength">Password must be at least 5 characters long.</div>
+        <div *ngIf="passAdd.errors.maxlength">Password must be less than 30 characters long.</div>
+      </div>
+    </div>
+    <div class="btn-toolbar">
+      <button type="submit" class="btn btn-primary" [disabled]="addForm.form.invalid">Add user</button>
+      <button type="button" class="btn btn-primary" (click)="cancelAdd()">Cancel</button>
+    </div>
+  </form>
+
+  <form role="form" #editForm="ngForm" (submit)="editUser()" [hidden]="!showEditForm">
+    <h4>Edit a user</h4>
+
+    <div class="alert alert-danger" [hidden]="!showAlertEdit">
+      This email address is already used by another user. Try to edit with another one.
+    </div>
+
+    <div class="form-group">
+      <label for="nameEdit">Name :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nameEdit"
+        name="name"
+        required
+        minlength="2"
+        maxlength="20"
+        [(ngModel)]="edit.name"
+        #nameEdit="ngModel"
+      />
+      <div *ngIf="nameEdit.invalid && (nameEdit.dirty || nameEdit.touched)" class="alert alert-danger">
+        <div *ngIf="nameEdit.errors.required">Name is required.</div>
+        <div *ngIf="nameEdit.errors.minlength">Name must be at least 2 characters long.</div>
+        <div *ngIf="nameEdit.errors.maxlength">Name must be less than 20 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="surnEdit">Surname :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="surnEdit"
+        name="surn"
+        required
+        minlength="2"
+        maxlength="20"
+        [(ngModel)]="edit.surn"
+        #surnEdit="ngModel"
+      />
+      <div *ngIf="surnEdit.invalid && (surnEdit.dirty || surnEdit.touched)" class="alert alert-danger">
+        <div *ngIf="surnEdit.errors.required">Surname is required.</div>
+        <div *ngIf="surnEdit.errors.minlength">Surname must be at least 2 characters long.</div>
+        <div *ngIf="surnEdit.errors.maxlength">Surname must be less than 20 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="emailEdit">Email :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="emailEdit"
+        name="email"
+        required
+        minlength="2"
+        email
+        [(ngModel)]="edit.email"
+        #emailEdit="ngModel"
+      />
+      <div *ngIf="emailEdit.invalid && (emailEdit.dirty || emailEdit.touched)" class="alert alert-danger">
+        <div *ngIf="emailEdit.errors.required">Email is required.</div>
+        <div *ngIf="emailEdit.errors.minlength">Email must be at least 2 characters long.</div>
+        <div *ngIf="emailEdit.errors.email">Email must be a valid email.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="passEdit">Password :</label>
+      <input
+        type="password"
+        class="form-control"
+        id="passEdit"
+        name="pass"
+        required
+        minlength="5"
+        maxlength="30"
+        [(ngModel)]="edit.pass"
+        #passEdit="ngModel"
+      />
+      <div *ngIf="passEdit.invalid && (passEdit.dirty || passEdit.touched)" class="alert alert-danger">
+        <div *ngIf="passEdit.errors.required">Password is required.</div>
+        <div *ngIf="passEdit.errors.minlength">Password must be at least 5 characters long.</div>
+        <div *ngIf="passEdit.errors.maxlength">Password must be less than 30 characters long.</div>
+      </div>
+    </div>
+    <div class="btn-toolbar">
+      <button type="submit" class="btn btn-primary" [disabled]="editForm.form.invalid">Save</button>
+      <button type="button" class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </form>
+
+  <table class="table table-hover" [hidden]="!showList">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Email</th>
+          <th scope="col">is Active</th>
+          <th scope="col">Role</th>
+          <th scope="col">Options</th>
+          <th scope="col">Rights management</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of listUsers">
+          <td>{{ user.name }}</td>
+          <td>{{ user.surn }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.active }}</td>
+          <td>{{ user.roles }}</td>
+          <td>
+            <div class="btn-toolbar">
+              <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+              <button class="btn btn-success" (click)="displayEditForm(user)">Edit</button>
+              <button *ngIf="user.active" class="btn btn-danger" (click)="deactivateUser(user.id)">Deactivate</button>
+              <button *ngIf="!user.active" class="btn btn-success" (click)="activateUser(user.id)">Activate</button>
+            </div>
+          </td>
+          <td>
+            <div class="btn-toolbar">
+              <button *ngIf="user.roles?.length == 2" class="btn btn-primary" (click)="setUser(user.id)">
+                Set USER
+              </button>
+              <button *ngIf="user.roles?.length == 1" class="btn btn-danger" (click)="setAdmin(user.id)">
+                Set ADMIN
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </table>
+</div>

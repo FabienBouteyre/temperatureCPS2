@@ -7,7 +7,6 @@ import cps2.project.temperature.Entity.Calendars.Specialities;
 import cps2.project.temperature.Repository.RepLesson;
 import cps2.project.temperature.Repository.RepLessonSpecialities;
 import cps2.project.temperature.Repository.RepLessoneSchedulesData;
-import cps2.project.temperature.Service.ServiceCalendaresConvert;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
@@ -34,9 +33,6 @@ import java.util.UUID;
 @Controller
 @RequestMapping(path = "/calendare")
 public class CalendareContr {
-
-    @Autowired
-    private ServiceCalendaresConvert serviceCalendaresConvert;
 
     @Autowired
     private RepLesson repLesson;
@@ -107,7 +103,7 @@ public class CalendareContr {
                 mlfile.transferTo(file);
 
                 FileReader fileReader = new FileReader(file);
-                Scanner sc = new Scanner(fileReader);
+                new Scanner(fileReader);
 
                 System.setProperty("ical4j.unfolding.relaxed", "true");
                 System.setProperty("net.fortuna.ical4j.timezone.cache.impl", MapTimeZoneCache.class.getName());

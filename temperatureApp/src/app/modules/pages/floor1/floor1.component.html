@@ -1,0 +1,9 @@
+<dx-vector-map id="vector-map" [projection]="projection">
+  <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"> </dxo-tooltip>
+  <dxi-layer [hoverEnabled]="false" [dataSource]="buildingData" name="building"> </dxi-layer>
+  <dxi-layer color="#008000" [dataSource]="roomsData1" [customize]="customizeLayers" name="rooms">
+    <dxo-label [enabled]="true" dataField="name" [customizeText]="customizeText">
+      <dxo-font [size]="12"></dxo-font>
+    </dxo-label>
+  </dxi-layer>
+</dx-vector-map>

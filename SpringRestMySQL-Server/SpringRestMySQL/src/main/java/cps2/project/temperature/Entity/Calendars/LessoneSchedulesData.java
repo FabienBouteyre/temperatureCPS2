@@ -1,8 +1,6 @@
 package cps2.project.temperature.Entity.Calendars;
 
 
-import org.springframework.context.annotation.Primary;
-
 import javax.persistence.*;
 import java.util.Date;
 

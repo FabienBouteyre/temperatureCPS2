@@ -6,13 +6,10 @@
 #include <WiFiNINA.h>
 #include <MQTT.h>
 #include <string.h>
-#include <EEPROM.h>
-
 
 /* In which pins are my sensors plugged? */
 #define LUM A0  // TEMT6000 Signal pin
 #define TMP 4   // DHT22 Signal pin
-
 
 /* We need a DHT object to address the sensor. */
 DHT dht(TMP, DHT22); // pin: TMP, model: DHT22
@@ -30,7 +27,7 @@ MQTTClient mqtt_client;
     2. what are the MQTT broket IP address and TCP port
 */
 const char* wifi_ssid = "Mqtt";
-const char* wifi_password = "KJHBEkj23lblska";
+const char* wifi_password = "KHBk32jh3kjhbksdjhbkjHBKJeh2";
 
 const char* mqtt_host = "192.168.137.1" ;
 const uint16_t mqtt_port =  1883;
@@ -46,26 +43,10 @@ boolean first_time ;
 uint32_t t0, t ;
 
 /* 'topic' is the string representing the topic on which messages
-    will be published.
-
-   TODO: You need to adapt it by setting:
-    1. 'surname' to your surname
-    2. 'ID' to a unique ID chosen in the class with other students
-*/
-String surname = "doe";
-String roomID = "400" ;
+    will be published.*/
 String topic = "#";
 
-/*Move Sensor*/
-
-int led = 13;                // the pin that the LED is atteched to
-int sensor = 2;              // the pin that the sensor is atteched to
-int state = LOW;             // by default, no motion detected
-int val = 0;
-
-
 /*Button*/
-
 const int buttonPin = 6;     // the number of the pushbutton pin
 const int ledPin =  13;
 int buttonState = 0;
@@ -75,13 +56,8 @@ int buttonState = 0;
   String macadress = "";
   int status = WL_IDLE_STATUS;
 
-/* Time between two sensings and values sent. */
+/*Time between two sensings and values sent.*/
 #define DELTA_T 2000
-
-/* EEPROM */
-byte value;
-int address = 0;
-
 
 /* ################################################################### */
 void setup() {
@@ -98,25 +74,17 @@ void setup() {
   mqtt_client.begin(mqtt_host, mqtt_port, wifi_client) ;
   mqtt_client.onMessage(callback);
 
-
   tmp = lum = hmdt = -1.0 ;
 
   first_time = true ;
 
-  // Time begins now!
+  /*Time begins now!*/
   t0 = t = millis() ;
-
-  /*setup move sensor*/
-  pinMode(led, OUTPUT);      // initalize LED as an output
-  pinMode(sensor, INPUT);    // initialize sensor as an input
-  Serial.begin(9600);        // initialize serial
-
 
   /*Button*/
   pinMode(ledPin, OUTPUT);
   // initialize the pushbutton pin as an input:
   pinMode(buttonPin, INPUT);
-
 
   /*Mac Address*/
   WiFi.macAddress(mac);
@@ -125,6 +93,7 @@ void setup() {
 
 /* ################################################################### */
 void loop() {
+
   /* We try to connect to the broker and launch the client loop.
   */
   mqtt_client.loop() ;
@@ -134,7 +103,7 @@ void loop() {
 
   /* Values are read from sensors at fixed intervals of time.
   */
-  // ===================================================
+
   t = millis() ;
   if ( first_time || (t - t0) >= DELTA_T ) {
     t0 = t ;
@@ -147,43 +116,8 @@ void loop() {
     sendValues() ;
     if(buttonState == LOW){
       delay(10000);
-    }
-
-    /***Macadres*/
-//    Serial.print("MAC: ");
-//    Serial.print(mac[5],HEX);
-//    Serial.print(":");
-//    Serial.print(mac[4],HEX);
-//    Serial.print(":");
-//    Serial.print(mac[3],HEX);
-//    Serial.print(":");
-//    Serial.print(mac[2],HEX);
-//    Serial.print(":");
-//    Serial.print(mac[1],HEX);
-//    Serial.print(":");
-//    Serial.println(mac[0],HEX);
-  }
-
-
-  /*sensor move*/
-
-  val = digitalRead(sensor);   // read sensor value
-  if (val == HIGH) {           // check if the sensor is HIGH
-    digitalWrite(led, HIGH);   // turn LED ON
-    delay(100);                // delay 100 milliseconds
-
-    if (state == LOW) {
-      Serial.println("Motion detected!");
-      state = HIGH;       // update variable state to HIGH
-    }
-  }
-  else {
-      digitalWrite(led, LOW); // turn LED OFF
-      delay(200);             // delay 200 milliseconds
-
-      if (state == HIGH){
-        Serial.println("Motion stopped!");
-        state = LOW;       // update variable state to LOW
+    }else{
+      delay(2000);
     }
   }
 
@@ -198,18 +132,6 @@ void loop() {
     // turn LED off:
     digitalWrite(ledPin, LOW);
   }
-
-  value = EEPROM.read(address);
-  Serial.print(address);
-  Serial.print("\t");
-  Serial.print(value, DEC);
-  Serial.println();
-  address = address + 1;
-  if (address == EEPROM.length()) {
-    address = 0;
-  }
-
-
 }
 
 
@@ -240,8 +162,6 @@ double getHmdt()
 {
   return dht.readHumidity() ;
 }
-
-
 
 /* ################################################################### */
 /* This function handles the connection/reconnection to
@@ -291,7 +211,6 @@ void reconnect() {
   Serial.print(topic) ;
   Serial.println("\"") ;
 
-  mqtt_client.publish(String(topic + "HELLO, it is the room: ").c_str(), String(roomID)) ;
   mqtt_client.subscribe("#");
 
 
@@ -303,57 +222,20 @@ void reconnect() {
 
 /* ################################################################### */
 /* This function handles the sending of all the values
-   collected by the sensors.
-   Values are sent on a regular basis (every DELTA_T_SEND_VALUES
-   milliseconds).
-*/
+   collected by the sensors.*/
 void sendValues() {
   if ( mqtt_client.connected() ) {
-//    if ( lum != -1 )
-//      mqtt_client.publish(String(topic + "/LUMI").c_str(), String(lum).c_str()) ;
-//      Serial.print(String(topic + "/LUMI").c_str(), String(lum).c_str());
     if ( tmp != -1 ){
-//      mqtt_client.publish(String(topic + "/temp").c_str(), String(tmp).c_str());
-        mqtt_client.publish(String(topic + "/temp").c_str(), String("{\"room\":\"" + roomID + "\", \"temp\":\"" + tmp + "\", \"light\":\"" + lum + "\",\"hmdt\":\"" + hmdt + "\",\"move\":\"" + val + "\", \"address\":\"" + mac[5] + ":" + mac[4] + ":" + mac[3] + ":" + mac[2] + ":" + mac[1] + ":" + mac[0] + "\",\"button\":\"" + buttonState + "\"}").c_str());
-        Serial.println(tmp);
-      }
-//    if ( hmdt != -1 )
-//      mqtt_client.publish(String(topic + "/HMDT").c_str(), String(hmdt).c_str()) ;
-//      Serial.print(String(topic + "/HMDT").c_str(), String(hmdt).c_str());
+      mqtt_client.publish(String(topic + "/temp").c_str(), String("{\"temp\":\"" + String(tmp) + "\", \"light\":\"" + lum + "\",\"hmdt\":\"" + hmdt + "\",\"address\":\"" + mac[5] + ":" + mac[4] + ":" + mac[3] + ":" + mac[2] + ":" + mac[1] + ":" + mac[0] + "\",\"button\":" + buttonState + "}").c_str());
+    }
   }
 }
-
-String xorit(String text){ // any number for key except
-  int n = text.length();
-  char str[n + 1];
-  strcpy(str, text.c_str());
-
-  int key = 5;
-  for(int i=0; i<strlen(str);i++){
-      str[i] ^= key;
-  }
-  return String(str).c_str();
-}
-
-//+ xorit("heelloo")
-
-//String xorit(char* str){ // any number for key except
-//  int key = 5;
-//  for(int i=0; i<strlen(str);i++){
-//      str[i] ^= key;
-//  }
-//  return String(str).c_str();
-//}
-
-// + xorit("heelloo")
 
 /* ################################################################### */
 /* The main callback to listen to topics.
 */
-void callback(String &intopic, String &payload)
-{
+void callback(String &intopic, String &payload) {
   /* There's nothing to do here ... as long as the module
-      cannot handle messages.
-  */
+      cannot handle messages.*/
   Serial.println("incoming: " + intopic + " - " + payload);
 }

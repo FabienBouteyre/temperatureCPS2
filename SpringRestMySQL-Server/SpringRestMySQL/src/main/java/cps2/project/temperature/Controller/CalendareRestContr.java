@@ -8,7 +8,6 @@ import cps2.project.temperature.Entity.Mess;
 import cps2.project.temperature.Repository.RepLesson;
 import cps2.project.temperature.Repository.RepLessonSpecialities;
 import cps2.project.temperature.Repository.RepLessoneSchedulesData;
-import cps2.project.temperature.Service.ServiceCalendaresConvert;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
@@ -17,7 +16,7 @@ import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.component.CalendarComponent;
 import net.fortuna.ical4j.util.MapTimeZoneCache;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +37,6 @@ import java.util.UUID;
 public class CalendareRestContr {
 
     @Autowired
-    private ServiceCalendaresConvert serviceCalendaresConvert;
-
-    @Autowired
     private RepLesson repLesson;
 
     @Autowired
@@ -49,33 +45,39 @@ public class CalendareRestContr {
     @Autowired
     private RepLessonSpecialities repLessonSpecialities;
 
+    @Transactional(readOnly=true)
     @GetMapping("/specialist")
     public List<Specialities> GetSpecialist(){
        return repLessonSpecialities.findAll();
     }
 
+    @Transactional(readOnly=false)
     @PostMapping("/specialist")
     public List<Specialities> PostSpecialist(@RequestParam("id") Specialities specialities, Model model){
         repLessonSpecialities.delete(specialities);
         return repLessonSpecialities.findAll();
     }
 
+    @Transactional(readOnly=true)
     @GetMapping("/lessons/{id}")
     public List<Lesson> GetLessons(@PathVariable("id") Specialities specialities){
         return repLesson.findBySpecialities(specialities);
     }
 
+    @Transactional(readOnly=false)
     @PostMapping("/lessons/{id}")
     public List<Lesson> PostLessons(@PathVariable("id") Specialities specialities, @RequestParam("id") Lesson lesson){
         repLesson.delete(lesson);
         return repLesson.findBySpecialities(specialities);
     }
 
+    @Transactional(readOnly=true)
     @GetMapping("/lessons/schedule/{id}")
     public List<LessoneSchedulesData> GetLessonsScheduleList(@PathVariable("id") Lesson lesson){
         return repLessoneSchedulesData.findByLesson(lesson);
     }
 
+    @Transactional(readOnly=false)
     @PostMapping("/lessons/schedule/{id}")
     public List<LessoneSchedulesData> GetLessonsScheduleList(@PathVariable("id") Lesson lesson, @RequestParam("id") LessoneSchedulesData lessoneSchedulesData){
         repLessoneSchedulesData.delete(lessoneSchedulesData);
@@ -87,6 +89,7 @@ public class CalendareRestContr {
         return new Mess("This map support post for download calendare data with formate *.ics");
     }
 
+    @Transactional(readOnly=false)
     @PostMapping
     public Mess PostCalendare(@RequestParam(name = "lesson") String les, @RequestParam(name = "file") MultipartFile mlfile, Model model) throws IOException, ParserException, ParseException {
 
@@ -99,7 +102,7 @@ public class CalendareRestContr {
                 mlfile.transferTo(file);
 
                 FileReader fileReader = new FileReader(file);
-                Scanner sc = new Scanner(fileReader);
+                new Scanner(fileReader);
 
                 System.setProperty("ical4j.unfolding.relaxed", "true");
                 System.setProperty("net.fortuna.ical4j.timezone.cache.impl", MapTimeZoneCache.class.getName());

@@ -5,8 +5,10 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,10 +21,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
+    public static boolean admin = false;
     private RequestQueue mQueue;
     Button btn_login;
     EditText et_username, et_password;
@@ -34,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         TextView signup = (TextView) findViewById(R.id.signUpTextView);
 
@@ -75,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                                 toast.show();
                             }
                         }
-                    }, 4000);
+                    }, 3000);
 
                 }
             }
@@ -92,6 +97,10 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             String get_password = response.getString("pass");
                             password = get_password;
+
+                            JSONArray roles = response.getJSONArray("roles");
+                            String admin_str = roles.getString(1);
+                            admin = admin_str.equals("ADMIN");
 
                         } catch (JSONException e) {
                             e.printStackTrace();

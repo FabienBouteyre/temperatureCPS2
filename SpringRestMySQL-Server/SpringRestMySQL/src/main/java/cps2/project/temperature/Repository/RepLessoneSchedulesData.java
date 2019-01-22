@@ -9,4 +9,5 @@ import java.util.List;
 public interface RepLessoneSchedulesData extends JpaRepository<LessoneSchedulesData, Long> {
 
     List<LessoneSchedulesData> findByLesson(Lesson lesson);
+    List<LessoneSchedulesData> findAll();
 }

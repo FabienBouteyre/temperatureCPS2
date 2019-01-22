@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,7 +14,6 @@ public class Advice {
 
 	    @Id
 	    @Column(name = "id")
-	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    private Long id;
 
 	    @Column(name = "type")
@@ -42,6 +39,10 @@ public class Advice {
 	    
 	    @Column(name = "outsideTemperature")
 	    private String outsideTemperature;
+	    
+	    @Column(name = "active")
+	    private int active;
+
 
 		public Long getId() {
 			return id;
@@ -114,5 +115,15 @@ public class Advice {
 		public void setOutsideTemperature(String outsideTemperature) {
 			this.outsideTemperature = outsideTemperature;
 		}
+
+		public int getActive() {
+			return active;
+		}
+
+		public void setActive(int active) {
+			this.active = active;
+		}
+		
+		
 
 }

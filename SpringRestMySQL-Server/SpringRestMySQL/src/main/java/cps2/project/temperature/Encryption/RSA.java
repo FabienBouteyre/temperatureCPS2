@@ -1,7 +1,5 @@
 package cps2.project.temperature.Encryption;
 
-import org.springframework.stereotype.Service;
-
 import java.math.BigInteger;
 import java.util.Random;
 

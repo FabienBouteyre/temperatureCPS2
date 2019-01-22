@@ -6,6 +6,7 @@ import cps2.project.temperature.Entity.SensorID;
 import cps2.project.temperature.Repository.RepSensorData;
 import cps2.project.temperature.Repository.RepSensorID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,16 +23,19 @@ public class SensorRestContr {
     @Autowired
     private RepSensorData repSensorData;
 
+    @Transactional(readOnly=true)
     @GetMapping("/data")
     public List<SensorID> getApiData(){
         return repSensorID.findAll();
     }
 
+    @Transactional(readOnly=true)
     @GetMapping("/data/{id}")
     public List<SensorData> GetApiDataById(@PathVariable("id") SensorID sensorId){
         return repSensorData.findBySensoridOrderByDateDesc(sensorId);
     }
 
+    @Transactional(readOnly=true)
     @GetMapping("/data/current")
     public List<SensorID> GetDataCurrentRoom() {
         List<SensorID> sensorIDS = repSensorID.findAll();

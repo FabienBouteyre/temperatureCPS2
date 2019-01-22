@@ -1,6 +1,5 @@
 package cps2.project.temperature.Controller;
 
-import cps2.project.temperature.Entity.Mess;
 import cps2.project.temperature.Entity.OpenWeatherMap.WeatherObject;
 import cps2.project.temperature.Service.ServiceOpenWeatherMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/api/weather")
 public class WeatherRestController {
 
