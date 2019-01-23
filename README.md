@@ -46,7 +46,7 @@ Create the database entering these following commands:
 
 ```use tempBDD; ```
 
-Import the schema of ```tempbdd.sql``` in the main folder
+Import the schema of ```tempbdd.sql``` which is in the main folder
 
 
 ### RabbitMQ:
@@ -147,7 +147,7 @@ Import the project. Open Android Studio, click ```Open an existing Android Studi
 
 ### Start the Angular app
 
-In the ```temperatureApp``` folder, enter ```npm install``` to get the dependencies.
+Go to the ```temperatureApp``` folder, enter ```npm install``` to get the dependencies.
 Enter ```ng serve``` to start the server available on ```localhost:4200```.
 
   
