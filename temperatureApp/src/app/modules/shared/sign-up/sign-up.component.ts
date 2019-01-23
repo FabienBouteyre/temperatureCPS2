@@ -30,15 +30,16 @@ export class SignUpComponent {
 
   signUp() {
     this.userService.addUser(this.newUser).subscribe(data => {
-      if (isObject(data)) {
-        this.authService.setSignUpSuccessful(isObject(data));
+      
+      if (data) {
+        this.authService.setSignUpSuccessful(true);
         this.router.navigateByUrl('/login');
         this.newUser.name = '';
         this.newUser.surn = '';
         this.newUser.email = '';
         this.newUser.pass = '';
       } else {
-        this.authService.setSignUpUnsuccessful(!isObject(data));
+        this.authService.setSignUpUnsuccessful(true);
         this.router.navigateByUrl('/sign-up');
       }
     });
